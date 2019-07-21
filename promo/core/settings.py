@@ -23,7 +23,7 @@ SECRET_KEY = 'z$r-5ozlwlzl_0i*y4=!v2@#x53^n#6eru$7+48ue(hh%(d+h%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*', '127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -52,7 +52,7 @@ ROOT_URLCONF = 'core.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, "application/djangoapp/templates")],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -64,15 +64,6 @@ TEMPLATES = [
         },
     },
 ]
-
-TEMPLATE_LOADERS = (
-	'django.template.loaders.filesystem.Loader',
-	'django.template.loaders.app_directories.Loader',
-)
-
-TEMPLATE_DIRS = (
-    '/application/djangoapp/templates',
-)
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
@@ -129,3 +120,4 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "medias")
+

@@ -12,4 +12,4 @@ def index(request):
 def create(request):
     p = Promotions(isFlat = request.POST['isFlat'], flat = request.POST['flat'], percent = request.POST['percent'], productId = request.POST['productId'])
     p.save()
-    return HttpResponse("succesfully created")
+    return HttpResponse("successfully created")
