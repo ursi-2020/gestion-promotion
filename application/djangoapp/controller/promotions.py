@@ -1,7 +1,6 @@
 from application.djangoapp.models import *
 from django.core import serializers
-from django.http import HttpResponse, QueryDict
-from application.djangoapp.controller import promotions as promotions
+from django.http import HttpResponse
 from django.forms.models import modelform_factory
 import json
 
@@ -12,4 +11,4 @@ def index(request):
 def create(request):
     p = Promotions(isFlat = request.POST['isFlat'], flat = request.POST['flat'], percent = request.POST['percent'], productId = request.POST['productId'])
     p.save()
-    return HttpResponse("successfully created")
+    return HttpResponse("Successfully created")
