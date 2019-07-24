@@ -18,6 +18,7 @@ from django.urls import include, path
 
 urlpatterns = [
     path('', include('application.djangoapp.urls')),
+    # First version of api
     path('api/v1/', include('application.djangoapp.urls')),
     path('admin/', admin.site.urls),
 ]

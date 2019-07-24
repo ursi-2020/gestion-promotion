@@ -52,7 +52,8 @@ ROOT_URLCONF = 'core.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        #FRONT ADD
+        'DIRS': [os.path.join(BASE_DIR, "application/djangoapp/templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -64,6 +65,16 @@ TEMPLATES = [
         },
     },
 ]
+
+# FRONT ADD
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+)
+
+TEMPLATE_DIRS = (
+    '/application/djangoapp/templates',
+)
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
