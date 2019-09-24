@@ -1,36 +1,33 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block content %} {% block head %}
+<title>PROMOTIONS</title>
+{% endblock %}
 
-{% block content %}
-    {% block head %}
-        <title>PROMOTIONS</title>
-    {% endblock %}
-    
-    <form action='promotions/index' method='GET'>
-        <button type='submit'> INDEX </button>
-    </form>
-    
-    <form action='promotions/displayCreate' method='POST'>
-        {% csrf_token %}
-        <button type='submit'> CREATE </button>
-    </form>
-    
-    <form action='promotions/displayUpdate' method='POST'>
-        {% csrf_token %}
-        <button type='submit'> UPDATE </button>
-    </form>
-    
-    <form action='promotions/displayDelete' method='POST'>
-        {% csrf_token %}
-        <button type='submit'> DELETE </button>
-    </form>
+<form action='promotions/index' method='GET'>
+    <button type='submit'> INDEX </button>
+</form>
 
-    <form action= 'crm/indexcrm' method='GET'>
-        <button type='submit'> INDEX CRM </button>
-    </form>
-    
-    <form action= 'crm/displayCreatecrm' method='POST'>
-        {% csrf_token %}
-        <button type='submit'> CREATE CRM </button>
-    </form>
+<form action='promotions/displayCreate' method='POST'>
+    {% csrf_token %}
+    <button type='submit'> CREATE </button>
+</form>
+
+<form action='promotions/displayUpdate' method='POST'>
+    {% csrf_token %}
+    <button type='submit'> UPDATE </button>
+</form>
+
+<form action='promotions/displayDelete' method='POST'>
+    {% csrf_token %}
+    <button type='submit'> DELETE </button>
+</form>
+
+<form action='crm/indexcrm' method='GET'>
+    <button type='submit'> INDEX CRM </button>
+</form>
+
+<form action='crm/displayCreatecrm' method='POST'>
+    {% csrf_token %}
+    <button type='submit'> CREATE CRM </button>
+</form>
 
 {% endblock %}

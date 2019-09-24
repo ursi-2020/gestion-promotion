@@ -76,6 +76,7 @@ TEMPLATE_DIRS = (
     '/application/djangoapp/templates',
 )
 
+
 WSGI_APPLICATION = 'core.wsgi.application'
 
 # Database

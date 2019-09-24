@@ -21,4 +21,3 @@ class CustomerForm(forms.Form):
     firstName = forms.CharField(max_length=200)
     lastName = forms.CharField(max_length=200)
     fidelityPoint = forms.IntegerField(min_value=0)
-
