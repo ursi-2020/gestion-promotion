@@ -5,6 +5,9 @@ from django.forms.models import modelform_factory
 import json
 
 
+from django.views.decorators.csrf import csrf_exempt
+
+
 # Promotions - Index
 # Display a listing of the resource.
 def index(request):

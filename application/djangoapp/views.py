@@ -6,6 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from django.shortcuts import redirect
 from django.shortcuts import render
+from datetime import datetime, date
 
 import requests
 
@@ -14,9 +15,27 @@ from application.djangoapp.models import *
 
 from application.djangoapp.controller import promotions as promotions
 
+time = api.send_request('scheduler', 'clock/time')
+print("time = "+str(time))
+
+
+def schedule_task(host, url, time, recurrence, data, source, name):
+    time_str = time.strftime('%d/%m/%Y-%H:%M:%S')
+    headers = {'Host': 'scheduler'}
+    data = {"target_url": url, "target_app": host, "time": time_str, "recurrence": recurrence, "data": data, "source_app": source, "name": name}
+    r = requests.post(api.api_services_url + 'schedule/add', headers = headers, json = data)
+    print(r.status_code)
+    print(r.text)
+    return r.text
+
+# api.post_request("scheduler", "/reset", body={})
+schedule_task("gestion-promotion", "admin/promotions/create", datetime(year = 2019, month = 1, day = 7, hour = 10, minute = 00), "none", "none", "gestion-promotion", "create")
+# api.send_request("scheduler", "/")
+# api.send_request("scheduler", "/schedule/list")
+
 
 # Dispatcher of promotion resources
-@csrf_exempt
+# @csrf_exempt
 def promo(request):
     if request.method == 'GET':
         return promotions.index(request)
