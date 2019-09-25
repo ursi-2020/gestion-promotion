@@ -20,4 +20,14 @@ class PromotionIdForm(forms.Form):
 class CustomerForm(forms.Form):
     firstName = forms.CharField(max_length=200)
     lastName = forms.CharField(max_length=200)
-    fidelityPoint = forms.IntegerField(min_value=0)
+    fidelityPoint = forms.IntegerField(initial=0)
+    payment = forms.IntegerField(initial=0)
+    account = forms.CharField(max_length=10, initial="")
+
+class Products(forms.Form):
+    codeProduit = forms.CharField(max_length=200)
+    familleProduit = forms.CharField(max_length=200)
+    descriptionProduit = forms.CharField(max_length=200)
+    quantiteMin = forms.IntegerField(min_value = 0)
+    packaging = forms.IntegerField(min_value = 0)
+    prix = forms.IntegerField(min_value = 0)

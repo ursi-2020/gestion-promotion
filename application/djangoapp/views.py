@@ -7,31 +7,33 @@ from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import redirect
 from django.shortcuts import render
 from datetime import datetime, date
+from django.core import serializers
 
 import requests
+import json
 
 from application.djangoapp.forms import *
 from application.djangoapp.models import *
 
 from application.djangoapp.controller import promotions as promotions
 
-time = api.send_request('scheduler', 'clock/time')
-print("time = "+str(time))
+# time = api.send_request('scheduler', 'clock/time')
+# print("time = "+str(time))
 
 
-def schedule_task(host, url, time, recurrence, data, source, name):
-    time_str = time.strftime('%d/%m/%Y-%H:%M:%S')
-    headers = {'Host': 'scheduler'}
-    data = {"target_url": url, "target_app": host, "time": time_str, "recurrence": recurrence, "data": data, "source_app": source, "name": name}
-    r = requests.post(api.api_services_url + 'schedule/add', headers = headers, json = data)
-    print(r.status_code)
-    print(r.text)
-    return r.text
+# def schedule_task(host, url, time, recurrence, data, source, name):
+#     time_str = time.strftime('%d/%m/%Y-%H:%M:%S')
+#     headers = {'Host': 'scheduler'}
+#     data = {"target_url": url, "target_app": host, "time": time_str, "recurrence": recurrence, "data": data, "source_app": source, "name": name}
+#     r = requests.post(api.api_services_url + 'schedule/add', headers = headers, json = data)
+#     print(r.status_code)
+#     print(r.text)
+#     return r.text
 
-# api.post_request("scheduler", "/reset", body={})
-schedule_task("gestion-promotion", "admin/promotions/create", datetime(year = 2019, month = 1, day = 7, hour = 10, minute = 00), "none", "none", "gestion-promotion", "create")
-# api.send_request("scheduler", "/")
-# api.send_request("scheduler", "/schedule/list")
+# # api.post_request("scheduler", "/reset", body={})
+# schedule_task("gestion-promotion", "admin/promotions/create", datetime(year = 2019, month = 1, day = 7, hour = 10, minute = 00), "none", "none", "gestion-promotion", "create")
+# # api.send_request("scheduler", "/")
+# # api.send_request("scheduler", "/schedule/list")
 
 
 # Dispatcher of promotion resources
@@ -157,27 +159,55 @@ def displayDelete(request):
 # for Crm App
 # Display all customers
 def indexcrm(request):
-    if request.method == 'GET':
-        data = api.send_request('crm', 'customer')
-        d = { 
-            "list_customer": data
+    # if request.method == 'GET':
+    #     data = api.send_request('crm', 'customer')
+    #     d = { 
+    #         "list_customer": data
+    #     }
+    #     return render(request, 'index_crm.html', d)
+    data = Customers.objects.all()
+    d = { 
+            "list_customers": data
         }
-        return render(request, 'index_crm.html', d)
+    return render(request, 'index_crm.html', d)
+
 
 # Function to create a customer
-def createcrm(request):
-    if request.method == 'POST':
-        form = CustomerForm(request.POST)
-        if form.is_valid():
-            fn = form.cleaned_data['firstName']
-            ln = form.cleaned_data['lastName']
-            fp = form.cleaned_data['fidelityPoint']
-            b = {'firstName': fn, 'lastName': ln, 'fidelityPoint': fp}
-            post = api.post_request('crm', 'customer/', body=b)
-            form = CustomerForm()
-            return render(request, 'createcrm.html', {'form': form})
+# def createcrm(request):
+#     if request.method == 'POST':
+#         form = CustomerForm(request.POST)
+#         if form.is_valid():
+#             fn = form.cleaned_data['firstName']
+#             ln = form.cleaned_data['lastName']
+#             fp = form.cleaned_data['fidelityPoint']
+#             b = {'firstName': fn, 'lastName': ln, 'fidelityPoint': fp}
+#             post = api.post_request('crm', 'customer/', body=b)
+#             form = CustomerForm()
+#             return render(request, 'createcrm.html', {'form': form})
+def loadcrm(request):
+    if request.method == 'GET':
+        customers = api.send_request('crm', 'api/data')
+        customers = json.loads(customers)
+        for c in customers:
+            record = Customers(id = c['id'], firstName = c['firstName'], lastName = c['lastName'], fidelityPoint = c['fidelityPoint'], payment = c['payment'], account = c['account'])
+            record.save()
+    return render(request, 'home.html')
 
-# Form to create a customer
-def displayCreatecrm(request):
-    form = CustomerForm()
-    return render(request, 'createcrm.html', {'form': form})
+
+# for Catalogue-Produit app
+def indexproduct(request):
+    data = Products.objects.all()
+    d = { 
+            "list_products": data
+        }
+    return render(request, 'index_product.html', d)
+
+def loadproduct(request):
+    if request.method == 'GET':
+        products = api.send_request('catalogue-produit', 'catalogueproduit/api/data')
+        print(products)
+        p = json.loads(products)    
+        for c in p['produits']:
+            record = Products(id = c['id'], codeProduit = c['codeProduit'], familleProduit = c['familleProduit'], descriptionProduit = c['descriptionProduit'], quantiteMin = c['quantiteMin'], packaging = c['packaging'], prix = c['prix'])
+            record.save()
+    return render(request, 'home.html')

@@ -23,12 +23,17 @@ urlpatterns = [
 	path('promo', views.promo, name='promo'),
 
 	# Login form & home page
+    path('', views.login, name='login'),
     path('login', views.login, name='login'),
     path('admin/home', views.home, name='home'),
 
     # Requests in front page to crm
     path('admin/crm/indexcrm', views.indexcrm, name='indexcrm'),
+    path('admin/crm/loadcrm', views.loadcrm, name='loadcrm'),
 
-    path('admin/crm/displayCreatecrm', views.displayCreatecrm, name='displayCreatecrm'),
-    path('admin/crm/createcrm', views.createcrm, name='createcrm'),
+    # Requests in front page to catalogue produit
+    path('admin/product/indexproduct', views.indexproduct, name='indexproduct'),
+    path('admin/product/loadproduct', views.loadproduct, name='loadproduct'),
+
+
 ]
