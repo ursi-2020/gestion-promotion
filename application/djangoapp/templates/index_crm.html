@@ -1,2 +1,1 @@
-{% extends "base.html" %} {% block content %}
-<pre>{{ list_customer | pprint }}</pre> {% endblock %}
+{% extends "base.html" %} {% block content %} {% for c in list_customers %} {{ c.id }} {{ c.firstName }} {{ c.lastName }} {{ c.fidelityPoint }} {{ c.account }} {{ c.payment }} {{ value|linebreaks }} {% endfor %} {% endblock %}
