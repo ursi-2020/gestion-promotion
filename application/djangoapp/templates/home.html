@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% block content %} {% block head %}
 <title>PROMOTIONS</title>
 {% endblock %}
-
+<h1>GESTION-PROMOTION</h1>
 <form action='promotions/index' method='GET'>
     <button type='submit'> INDEX </button>
 </form>
@@ -21,13 +21,24 @@
     <button type='submit'> DELETE </button>
 </form>
 
-<form action='crm/indexcrm' method='GET'>
+<h1>CRM</h1>
+<form action='{{ HTTP_HOST }}/admin/crm/indexcrm' method='GET'>
     <button type='submit'> INDEX CRM </button>
 </form>
 
-<form action='crm/displayCreatecrm' method='POST'>
+<form action='{{ HTTP_HOST }}/admin/crm/loadcrm' method='GET'>
     {% csrf_token %}
-    <button type='submit'> CREATE CRM </button>
+    <button type='submit'> LOAD CRM </button>
+</form>
+
+<h1>CATALOGUE-PRODUIT</h1>
+<form action='{{ HTTP_HOST }}/admin/product/indexproduct' method='GET'>
+    <button type='submit'> INDEX PRODUCT </button>
+</form>
+
+<form action='{{ HTTP_HOST }}/admin/product/loadproduct' method='GET'>
+    {% csrf_token %}
+    <button type='submit'> LOAD PRODUCT </button>
 </form>
 
 {% endblock %}

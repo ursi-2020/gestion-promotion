@@ -1,0 +1,1 @@
+{% extends "base.html" %} {% block content %} {% for c in list_products %} {{ c.id }} {{ c.codeProduit }} {{ c.familleProduit }} {{ c.descriptionProduit }} {{ c.quantiteMin }} {{ c.packaging }} {{ c.prix }} {{ value|linebreaks }} {% endfor %} {% endblock%}
