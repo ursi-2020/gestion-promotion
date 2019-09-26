@@ -187,10 +187,14 @@ def indexcrm(request):
 def loadcrm(request):
     if request.method == 'GET':
         customers = api.send_request('crm', 'api/data')
-        customers = json.loads(customers)
-        for c in customers:
-            record = Customers(id = c['id'], firstName = c['firstName'], lastName = c['lastName'], fidelityPoint = c['fidelityPoint'], payment = c['payment'], account = c['account'])
-            record.save()
+        result_expected = serializers.serialize("json", Customers.objects.all())
+        crm, promo = json.dumps(customers, sort_keys=True), json.dumps(result_expected, sort_keys=True)
+        if crm != promo:
+            Customers.objects.all().delete()
+            customers = json.loads(customers)
+            for c in customers:
+                record = Customers(id = c['id'], firstName = c['firstName'], lastName = c['lastName'], fidelityPoint = c['fidelityPoint'], payment = c['payment'], account = c['account'])
+                record.save()
     return render(request, 'home.html')
 
 
@@ -205,9 +209,11 @@ def indexproduct(request):
 def loadproduct(request):
     if request.method == 'GET':
         products = api.send_request('catalogue-produit', 'catalogueproduit/api/data')
-        print(products)
-        p = json.loads(products)    
-        for c in p['produits']:
-            record = Products(id = c['id'], codeProduit = c['codeProduit'], familleProduit = c['familleProduit'], descriptionProduit = c['descriptionProduit'], quantiteMin = c['quantiteMin'], packaging = c['packaging'], prix = c['prix'])
-            record.save()
+        result_expected = serializers.serialize("json", Products.objects.all())
+        prod, promo = json.dumps(products, sort_keys=True), json.dumps(result_expected, sort_keys=True)
+        if prod != promo:
+            p = json.loads(products)
+            for c in p['produits']:
+                record = Products(id = c['id'], codeProduit = c['codeProduit'], familleProduit = c['familleProduit'], descriptionProduit = c['descriptionProduit'], quantiteMin = c['quantiteMin'], packaging = c['packaging'], prix = c['prix'])
+                record.save()
     return render(request, 'home.html')
