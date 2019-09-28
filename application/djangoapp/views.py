@@ -17,27 +17,30 @@ from application.djangoapp.models import *
 
 from application.djangoapp.controller import promotions as promotions
 
-# time = api.send_request('scheduler', 'clock/time')
-# print("time = "+str(time))
+
+# Function to schedule tasks given by the SOC
+def schedule_task(host, url, time, recurrence, data, source, name):
+    time_str = time.strftime('%d/%m/%Y-%H:%M:%S')
+    headers = {'Host': 'scheduler'}
+    data = {"target_url": url, "target_app": host, "time": time_str, "recurrence": recurrence, "data": data, "source_app": source, "name": name}
+    r = requests.post(api.api_services_url + 'schedule/add', headers = headers, json = data)
+    print(r.status_code)
+    print(r.text)
+    return r.text
 
 
-# def schedule_task(host, url, time, recurrence, data, source, name):
-#     time_str = time.strftime('%d/%m/%Y-%H:%M:%S')
-#     headers = {'Host': 'scheduler'}
-#     data = {"target_url": url, "target_app": host, "time": time_str, "recurrence": recurrence, "data": data, "source_app": source, "name": name}
-#     r = requests.post(api.api_services_url + 'schedule/add', headers = headers, json = data)
-#     print(r.status_code)
-#     print(r.text)
-#     return r.text
+# Refreshes the two databases Products and Customers in posting to CRM and catalogue-produit to refresh all datas
+def refresh(request):
+    # Refreshes Customers
+    schedule_task("gestion-promotion", "admin/crm/loadcrm", datetime(year = 2019, month = 1, day = 7, hour = 1, minute = 20), "none", {}, "gestion-promotion", "loadcrm")
 
-# # api.post_request("scheduler", "/reset", body={})
-# schedule_task("gestion-promotion", "admin/promotions/create", datetime(year = 2019, month = 1, day = 7, hour = 10, minute = 00), "none", "none", "gestion-promotion", "create")
-# # api.send_request("scheduler", "/")
-# # api.send_request("scheduler", "/schedule/list")
+    # Refreshes Products
+    schedule_task("gestion-promotion", "admin/product/loadproduct", datetime(year = 2019, month = 1, day = 7, hour = 1, minute = 20), "none", {}, "gestion-promotion", "loadproduct")
 
+    return render(request, 'home.html')
 
 # Dispatcher of promotion resources
-# @csrf_exempt
+@csrf_exempt
 def promo(request):
     if request.method == 'GET':
         return promotions.index(request)
@@ -74,7 +77,14 @@ def delete_request(host, url, body):
 
 
 
-# All of the functions above are used to display front
+# All of the functions above are used to display front & interact with crm & catalogue-produit
+
+
+def clear(request):
+    Promotions.objects.all().delete()
+    Products.objects.all().delete()
+    Customers.objects.all().delete()
+    return render(request, 'home.html')
 
 # Login form
 def login(request):
@@ -159,12 +169,6 @@ def displayDelete(request):
 # for Crm App
 # Display all customers
 def indexcrm(request):
-    # if request.method == 'GET':
-    #     data = api.send_request('crm', 'customer')
-    #     d = { 
-    #         "list_customer": data
-    #     }
-    #     return render(request, 'index_crm.html', d)
     data = Customers.objects.all()
     d = { 
             "list_customers": data
@@ -173,19 +177,9 @@ def indexcrm(request):
 
 
 # Function to create a customer
-# def createcrm(request):
-#     if request.method == 'POST':
-#         form = CustomerForm(request.POST)
-#         if form.is_valid():
-#             fn = form.cleaned_data['firstName']
-#             ln = form.cleaned_data['lastName']
-#             fp = form.cleaned_data['fidelityPoint']
-#             b = {'firstName': fn, 'lastName': ln, 'fidelityPoint': fp}
-#             post = api.post_request('crm', 'customer/', body=b)
-#             form = CustomerForm()
-#             return render(request, 'createcrm.html', {'form': form})
+@csrf_exempt
 def loadcrm(request):
-    if request.method == 'GET':
+    if request.method == 'POST' or request.method == 'GET':
         customers = api.send_request('crm', 'api/data')
         result_expected = serializers.serialize("json", Customers.objects.all())
         crm, promo = json.dumps(customers, sort_keys=True), json.dumps(result_expected, sort_keys=True)
@@ -199,6 +193,7 @@ def loadcrm(request):
 
 
 # for Catalogue-Produit app
+# Display all products
 def indexproduct(request):
     data = Products.objects.all()
     d = { 
@@ -206,12 +201,15 @@ def indexproduct(request):
         }
     return render(request, 'index_product.html', d)
 
+# Function to create a product
+@csrf_exempt
 def loadproduct(request):
-    if request.method == 'GET':
-        products = api.send_request('catalogue-produit', 'catalogueproduit/api/data')
+    if request.method == 'POST' or request.method == 'GET':
+        products = api.send_request('catalogue-produit', 'api/data')
         result_expected = serializers.serialize("json", Products.objects.all())
         prod, promo = json.dumps(products, sort_keys=True), json.dumps(result_expected, sort_keys=True)
         if prod != promo:
+            Products.objects.all().delete()
             p = json.loads(products)
             for c in p['produits']:
                 record = Products(id = c['id'], codeProduit = c['codeProduit'], familleProduit = c['familleProduit'], descriptionProduit = c['descriptionProduit'], quantiteMin = c['quantiteMin'], packaging = c['packaging'], prix = c['prix'])

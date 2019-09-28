@@ -22,6 +22,9 @@ urlpatterns = [
     # Resource dispatcher
 	path('promo', views.promo, name='promo'),
 
+    # Clear all datas from databases
+    path('admin/clear', views.clear, name="clear"),
+
 	# Login form & home page
     path('', views.login, name='login'),
     path('login', views.login, name='login'),
@@ -34,6 +37,9 @@ urlpatterns = [
     # Requests in front page to catalogue produit
     path('admin/product/indexproduct', views.indexproduct, name='indexproduct'),
     path('admin/product/loadproduct', views.loadproduct, name='loadproduct'),
+
+    # Refresh all the databases by the scheduler
+    path('admin/refresh', views.refresh, name="refresh")
 
 
 ]

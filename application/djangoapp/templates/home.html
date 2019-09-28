@@ -3,42 +3,54 @@
 {% endblock %}
 <h1>GESTION-PROMOTION</h1>
 <form action='promotions/index' method='GET'>
-    <button type='submit'> INDEX </button>
+    <button type='submit'> INDEX </button> Afficher toutes les promotions enregistrées dans l'application.
 </form>
 
 <form action='promotions/displayCreate' method='POST'>
     {% csrf_token %}
-    <button type='submit'> CREATE </button>
+    <button type='submit'> CREATE </button> Créer une promotion
 </form>
 
 <form action='promotions/displayUpdate' method='POST'>
     {% csrf_token %}
-    <button type='submit'> UPDATE </button>
+    <button type='submit'> UPDATE </button> Mettre à jour une promotion
 </form>
 
 <form action='promotions/displayDelete' method='POST'>
     {% csrf_token %}
-    <button type='submit'> DELETE </button>
+    <button type='submit'> DELETE </button> Supprimer une promotion
 </form>
 
 <h1>CRM</h1>
 <form action='{{ HTTP_HOST }}/admin/crm/indexcrm' method='GET'>
-    <button type='submit'> INDEX CRM </button>
+    <button type='submit'> INDEX CRM </button> Afficher tous les clients enregistrés dans l'application
 </form>
 
 <form action='{{ HTTP_HOST }}/admin/crm/loadcrm' method='GET'>
     {% csrf_token %}
-    <button type='submit'> LOAD CRM </button>
+    <button type='submit'> LOAD CRM </button> Charger tous les clients provenants de l'application CRM et de les enregistrer dans cette application
 </form>
 
 <h1>CATALOGUE-PRODUIT</h1>
 <form action='{{ HTTP_HOST }}/admin/product/indexproduct' method='GET'>
-    <button type='submit'> INDEX PRODUCT </button>
+    <button type='submit'> INDEX PRODUCT </button> Afficher tous les produits enregistrés dans l'application
 </form>
 
 <form action='{{ HTTP_HOST }}/admin/product/loadproduct' method='GET'>
     {% csrf_token %}
-    <button type='submit'> LOAD PRODUCT </button>
+    <button type='submit'> LOAD PRODUCT </button> Charger tous les produits provenants de l'application catalogue-produit et de les enregistrer dans cette application
+</form>
+
+<h1>SCHEDULER</h1>
+<form action='{{ HTTP_HOST }}/admin/refresh' method='POST'>
+    {% csrf_token %}
+    <button type='submit'> REFRESH DATAS </button> Programmer une actualisation des données enregistrées dans gestion des promotions en les redemandant à CRM et catalogue-produit
+</form>
+
+<h1>DELETE ALL DATAS FROM ALL DATABASES</h1>
+<form action='{{ HTTP_HOST }}/admin/clear' method='POST'>
+    {% csrf_token %}
+    <button type='submit'> CLEAR ALL </button> Supprimer TOUTES les données enregistrées dans l'application /!\ Attention cette action est irréversible /!\
 </form>
 
 {% endblock %}
