@@ -8,6 +8,7 @@ from django.shortcuts import redirect
 from django.shortcuts import render
 from datetime import datetime, date
 from django.core import serializers
+from datetime import datetime, timedelta
 
 import requests
 import json
@@ -31,11 +32,14 @@ def schedule_task(host, url, time, recurrence, data, source, name):
 
 # Refreshes the two databases Products and Customers in posting to CRM and catalogue-produit to refresh all datas
 def refresh(request):
+    clock_time = api.send_request('scheduler', 'clock/time')
+    time = datetime.strptime(clock_time, '"%d/%m/%Y-%H:%M:%S"')
+    time = time + timedelta(minutes=10)
     # Refreshes Customers
-    schedule_task("gestion-promotion", "admin/crm/loadcrm", datetime(year = 2019, month = 1, day = 7, hour = 1, minute = 20), "none", {}, "gestion-promotion", "loadcrm")
+    schedule_task("gestion-promotion", "admin/crm/loadcrm", time, "none", {}, "gestion-promotion", "loadcrm")
 
     # Refreshes Products
-    schedule_task("gestion-promotion", "admin/product/loadproduct", datetime(year = 2019, month = 1, day = 7, hour = 1, minute = 20), "none", {}, "gestion-promotion", "loadproduct")
+    schedule_task("gestion-promotion", "admin/product/loadproduct", time, "none", {}, "gestion-promotion", "loadproduct")
 
     return render(request, 'home.html')
 
@@ -190,7 +194,6 @@ def loadcrm(request):
                 record = Customers(id = c['id'], firstName = c['firstName'], lastName = c['lastName'], fidelityPoint = c['fidelityPoint'], payment = c['payment'], account = c['account'])
                 record.save()
     return render(request, 'home.html')
-
 
 # for Catalogue-Produit app
 # Display all products
