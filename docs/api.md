@@ -17,11 +17,6 @@ The gestion-promotion home page contains following elements :
 - A table registering all clients given by CRM
 - A table registering all products given by catalogue-produit
 
-# Create
-
-    # Resource dispatcher
-	path('promo', views.promo, name='promo'),
-
 
 # JSON API
 
@@ -157,6 +152,19 @@ Load all customers from crm into gestion-promotion app.
 
 **Auth required** : NO
 
+## Load customer by Id
+
+Load a customer by Id from crm into gestion-promotion app.
+
+**Service name** : `gestion-promotion`
+
+**URL** : `admin/crm/loadcrmbyid`
+
+**Method** : `POST`
+
+**Auth required** : NO
+
+
 
 ## Show all products
 
@@ -230,7 +238,7 @@ Refresh all products & customers from catalogue-produit into gestion-promotion a
 **Success Response code:** `200 OK`
 
 
-## Refresh all the databases by the scheduler
+## Clear all the databases
 
 Clear all products & customers & promotions in databases.
 
