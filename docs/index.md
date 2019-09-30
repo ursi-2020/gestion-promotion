@@ -9,5 +9,7 @@
 
 # Rôle de l'application
 
-Le rôle de ... est de ... dans le système d'information.
-etc.
+Le rôle de l'application de gestion des promotions est de créer des promotions spécifiques en fonction de différentes segmentations clients et des promotions globales au SI.
+
+Sur le lient suivant, vous trouverez ce qui est prévu pour le premier sprint.
+https://github.com/ursi-2020/gestion-promotion/wiki/Gestion-des-promotions---Sprint-1
