@@ -36,10 +36,10 @@ def refresh(request):
     time = datetime.strptime(clock_time, '"%d/%m/%Y-%H:%M:%S"')
     time = time + timedelta(minutes=10)
     # Refreshes Customers
-    schedule_task("gestion-promotion", "admin/crm/loadcrm", time, "none", {}, "gestion-promotion", "loadcrm")
+    schedule_task("gestion-promotion", "admin/crm/loadcrm", time, "minute", {}, "gestion-promotion", "loadcrm")
 
     # Refreshes Products
-    schedule_task("gestion-promotion", "admin/product/loadproduct", time, "none", {}, "gestion-promotion", "loadproduct")
+    schedule_task("gestion-promotion", "admin/product/loadproduct", time, "minute", {}, "gestion-promotion", "loadproduct")
 
     return render(request, 'home.html')
 
