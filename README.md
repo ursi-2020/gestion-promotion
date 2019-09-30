@@ -1,3 +1,2 @@
-# example-app
-Hi
-it's an example app for the best project of the year
+# Gestion des promotions
+Voir https://ursi-2020.github.io/gestion-promotion/ pour plus d'informations.
