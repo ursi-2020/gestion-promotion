@@ -1,50 +1,54 @@
 from django.urls import path
 
-from . import views
+from application.djangoapp.views import customers as c
+from application.djangoapp.views import ecommerce as e
+from application.djangoapp.views import magasin as m
+from application.djangoapp.views import products as p
+from application.djangoapp.views import scheduler as s
+from application.djangoapp.views import tools as t
+
 
 urlpatterns = [
 
-    # All Promotions
-    # Create
-    path('admin/promotions/displayCreate', views.displayCreate, name='displayCreate'),
-    path('admin/promotions/create', views.create, name='create'),
-
-    # Read
-    path('admin/promotions/index', views.index, name='index'),
-
-    # Update
-    path('admin/promotions/displayUpdate', views.displayUpdate, name='displayUpdate'),
-    path('admin/promotions/update', views.update, name='update'),
-
-    # Delete
-    path('admin/promotions/displayDelete', views.displayDelete, name='displayDelete'),
-    path('admin/promotions/delete', views.delete, name='delete'),
+    # Public routes
 
     # Promotions Ecommerce
-    path('promo/ecommerce', views.promoEco, name='promoEco'),
-    path('promo/ecommerce/calc', views.calcPromoEco, name='calcPromoEco')
+    path('promo/ecommerce', e.promoEco, name='promoEco'),
 
-    # Resource dispatcher
-	path('promo', views.promo, name='promo'),
+    # Promotions Magasin
+    path('promo/magasin', m.promoMag, name='promoMag'),
+
+    # Private routes
+
+    # Calculte promotions Ecommerce
+    path('promo/ecommerce/calc', e.calcPromoEco, name='calcPromoEco'),
+
+    #Calculate promotions Magasin
+    path('promo/magasin/calc', m.calcPromoMag, name='calcPromoMag'),
+
+    # Display promotions
+    path('promo/magasin/indexpromomag', m.indexpromomag, name='indexpromomag'),
+    path('promo/ecommerce/indexpromoeco', e.indexpromoeco, name='indexpromoeco'),
+
 
     # Clear all datas from databases
-    path('admin/clear', views.clear, name="clear"),
+    path('admin/clear', t.clear, name="clear"),
 
-	# Login form & home page
-    path('', views.login, name='login'),
-    path('login', views.login, name='login'),
-    path('admin/home', views.home, name='home'),
+	# Home page
+    path('admin/home', t.home, name='home'),
 
     # Requests in front page to crm
-    path('admin/crm/indexcrm', views.indexcrm, name='indexcrm'),
-    path('admin/crm/loadcrm', views.loadcrm, name='loadcrm'),
+    path('admin/crm/indexcrm', c.indexcrm, name='indexcrm'),
+    path('admin/crm/loadcrm', c.loadcrm, name='loadcrm'),
 
     # Requests in front page to catalogue produit
-    path('admin/product/indexproduct', views.indexproduct, name='indexproduct'),
-    path('admin/product/loadproduct', views.loadproduct, name='loadproduct'),
+    path('admin/product/indexproduct', p.indexproduct, name='indexproduct'),
+    path('admin/product/indexproducteco', p.indexproducteco, name='indexproducteco'),
+    path('admin/product/indexproductmag', p.indexproductmag, name='indexproductmag'),
+    path('admin/product/loadproduct', p.loadproduct, name='loadproduct'),
 
     # Refresh all the databases by the scheduler
-    path('admin/refresh', views.refresh, name="refresh")
+    path('admin/refresh', s.refresh, name="refresh")
 
 
 ]

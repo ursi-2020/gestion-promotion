@@ -4,7 +4,8 @@ from . import models
 
 admin.site.register(models.Article)
 admin.site.register(models.Vente)
-admin.site.register(models.Promotions)
 admin.site.register(models.Users)
 admin.site.register(models.Customers)
 admin.site.register(models.Products)
+admin.site.register(models.PromotionsEco)
+admin.site.register(models.PromotionsMag)

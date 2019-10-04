@@ -1,15 +1,14 @@
 from django.db import models
 
-class Promotions(models.Model):
-    isFlat = models.BooleanField()
-    flat = models.FloatField()
-    percent = models.FloatField()
-    productId = models.PositiveIntegerField()
-
-    def __str__(self):
-        return 'Promotions product: {}'.format(self.productId)
-
 class PromotionsEco(models.Model):
+    codeProduit = models.CharField(max_length=200)
+    familleProduit = models.CharField(max_length=200)
+    descriptionProduit = models.CharField(max_length=200)
+    quantiteMin = models.PositiveIntegerField()
+    packaging = models.PositiveIntegerField()
+    prix = models.PositiveIntegerField()
+
+class PromotionsMag(models.Model):
     codeProduit = models.CharField(max_length=200)
     familleProduit = models.CharField(max_length=200)
     descriptionProduit = models.CharField(max_length=200)
@@ -45,6 +44,22 @@ class Customers(models.Model):
     account = models.CharField(max_length=10, default="")
 
 class Products(models.Model):
+    codeProduit = models.CharField(max_length=200)
+    familleProduit = models.CharField(max_length=200)
+    descriptionProduit = models.CharField(max_length=200)
+    quantiteMin = models.PositiveIntegerField()
+    packaging = models.PositiveIntegerField()
+    prix = models.PositiveIntegerField()
+    
+class ProductsEco(models.Model):
+    codeProduit = models.CharField(max_length=200)
+    familleProduit = models.CharField(max_length=200)
+    descriptionProduit = models.CharField(max_length=200)
+    quantiteMin = models.PositiveIntegerField()
+    packaging = models.PositiveIntegerField()
+    prix = models.PositiveIntegerField()
+
+class ProductsMag(models.Model):
     codeProduit = models.CharField(max_length=200)
     familleProduit = models.CharField(max_length=200)
     descriptionProduit = models.CharField(max_length=200)
