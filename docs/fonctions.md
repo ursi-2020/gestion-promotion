@@ -1,21 +1,16 @@
 [Sommaire](https://ursi-2020.github.io/Documentation/)
 
-# CRM-app
-
-This application manage all data to create promotions.
-
-It includes:
-    - isFlat : Boolean in order to know if the promotion is an absolute reduction or a percentage
-    - flat : Absolute promotion (Null if it's percentage)
-    - percent : Percentage promotion (Null if it's absolute)
-    - productId : Product id concerned by promotion
-
 # Home Page
 
 The gestion-promotion home page contains following elements :
-- A table registering all promotions
+- Tables registering all promotions
+    - one for ecommerce promotions
+    - one for magasin promotions
 - A table registering all clients given by CRM
-- A table registering all products given by catalogue-produit
+- Tables registering all products given by catalogue-produit
+    - one for all products
+    - one for ecommerce products
+    - one for magasin products
 
 
 # JSON API
