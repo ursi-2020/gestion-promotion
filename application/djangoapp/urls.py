@@ -4,6 +4,7 @@ from . import views
 
 urlpatterns = [
 
+    # All Promotions
     # Create
     path('admin/promotions/displayCreate', views.displayCreate, name='displayCreate'),
     path('admin/promotions/create', views.create, name='create'),
@@ -18,6 +19,10 @@ urlpatterns = [
     # Delete
     path('admin/promotions/displayDelete', views.displayDelete, name='displayDelete'),
     path('admin/promotions/delete', views.delete, name='delete'),
+
+    # Promotions Ecommerce
+    path('promo/ecommerce', views.promoEco, name='promoEco'),
+    path('promo/ecommerce/calc', views.calcPromoEco, name='calcPromoEco')
 
     # Resource dispatcher
 	path('promo', views.promo, name='promo'),

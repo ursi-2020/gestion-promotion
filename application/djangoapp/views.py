@@ -9,6 +9,7 @@ from django.shortcuts import render
 from datetime import datetime, date
 from django.core import serializers
 from datetime import datetime, timedelta
+from random import randint
 
 import requests
 import json
@@ -17,6 +18,7 @@ from application.djangoapp.forms import *
 from application.djangoapp.models import *
 
 from application.djangoapp.controller import promotions as promotions
+from application.djangoapp.controller import promotions_eco as eco
 
 
 # Function to schedule tasks given by the SOC
@@ -41,6 +43,9 @@ def refresh(request):
     # Refreshes Products
     schedule_task("gestion-promotion", "admin/product/loadproduct", time, "minute", {}, "gestion-promotion", "loadproduct")
 
+    # Refreshes Promotions for Ecommerce everydays
+    schedule_task("gestion-promotion", "promo/ecommerce/calc", time, "day", {}, "gestion-promotion", "Calc ecommerce promos")
+
     return render(request, 'home.html')
 
 # Dispatcher of promotion resources
@@ -55,6 +60,38 @@ def promo(request):
     if request.method == 'PATCH':
         return promotions.update(request)
     return HttpResponse("The request has been failed")
+    
+# Dispatcher of promotion ecommerce resources
+@csrf_exempt
+def promoEco(request):
+    if request.method == 'GET':
+        return eco.index(request)
+    return HttpResponse("The request has been failed")
+
+# Compute Ecommerce Promotions
+def calcPromoEco(request):
+    count = Products.objects.count()
+    eco_random = Products.objects.all()[randint(0, count - 1)]
+    
+    promo = randint(5, 15)
+    price = eco_random.prix - eco_random.prix * (promo / 100)
+    p = PromotionsEco(codeProduit = eco_random.codeProduit, familleProduit = eco_random.familleProduit,
+                        descriptionProduit = eco_random.descriptionProduit, quantiteMin = eco_random.quantiteMin,
+                        packaging = eco_random.packaging, prix = price)
+    p.save()
+    
+    eco_random_2 = Products.objects.all()[randint(0, count - 1)]
+    while (eco_random_2 == eco_random):
+        eco_random_2 = Products.objects.all()[randint(0, count - 1)]
+    
+    promo = randint(5, 15)
+    price = eco_random_2.prix - eco_random_2.prix * (promo / 100)
+    p = PromotionsEco(codeProduit = eco_random_2.codeProduit, familleProduit = eco_random_2.familleProduit,
+                        descriptionProduit = eco_random_2.descriptionProduit, quantiteMin = eco_random_2.quantiteMin,
+                        packaging = eco_random_2.packaging, prix = price)
+    p.save()
+
+
 
 # PATCH request
 def patch_request(host, url, body):
