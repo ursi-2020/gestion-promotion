@@ -2,7 +2,7 @@
 
 # Sections
 
-* [API](api.md)
+*[API](api.md)*
 * [Communication](communication.md)
 * [Flux](flux.md)
 * [Use Case](use-case.md)
@@ -10,7 +10,15 @@
 
 # Rôle de l'application
 
-Le rôle de l'application de gestion des promotions est de créer des promotions spécifiques en fonction de différentes segmentations clients et des promotions globales au SI.
+Le rôle de l'application de gestion des promotions est de créer des promotions ecommerce et magasins en fonction de différentes segmentations clients et des promotions globales au SI.
 
-Sur le lient suivant, vous trouverez ce qui est prévu pour le premier sprint.
-https://github.com/ursi-2020/gestion-promotion/wiki/Gestion-des-promotions---Sprint-1
+# Use Case
+
+*[Anciennes versions des Uses Cases](use-case.md)*
+
+![use case](img/promotions.png)
+
+# Membre du groupe
+
+* Keyvan Meliani
+* Dorine Lemière
