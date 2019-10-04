@@ -10,6 +10,14 @@ class PromotionForm(forms.Form):
     percent = forms.FloatField(required=False, initial=0)
     productId = forms.IntegerField(min_value=1, required=False, initial=1)
 
+class PromotionEcoForm(forms.Form):
+    codeProduit = forms.CharField(max_length=200)
+    familleProduit = forms.CharField(max_length=200)
+    descriptionProduit = forms.CharField(max_length=200)
+    quantiteMin = forms.IntegerField(min_value = 0)
+    packaging = forms.IntegerField(min_value = 0)
+    prix = forms.IntegerField(min_value = 0)
+
 class PromotionIdForm(forms.Form):
     id = forms.IntegerField(min_value=1, required=True, initial=1)
     isFlat = forms.BooleanField(required=False)

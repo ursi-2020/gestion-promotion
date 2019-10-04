@@ -9,6 +9,14 @@ class Promotions(models.Model):
     def __str__(self):
         return 'Promotions product: {}'.format(self.productId)
 
+class PromotionsEco(models.Model):
+    codeProduit = models.CharField(max_length=200)
+    familleProduit = models.CharField(max_length=200)
+    descriptionProduit = models.CharField(max_length=200)
+    quantiteMin = models.PositiveIntegerField()
+    packaging = models.PositiveIntegerField()
+    prix = models.PositiveIntegerField()
+
 class Article(models.Model):
     nom = models.CharField(max_length=200)
     stock = models.PositiveIntegerField()
