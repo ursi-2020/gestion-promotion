@@ -37,11 +37,12 @@ class Users(models.Model):
     password = models.CharField(max_length=200)
 
 class Customers(models.Model):
-    firstName = models.CharField(max_length=200)
-    lastName = models.CharField(max_length=200)
-    fidelityPoint = models.IntegerField(default=0)
-    payment = models.IntegerField(default=0)
-    account = models.CharField(max_length=10, default="")
+    IdClient = models.TextField(default="")
+    Nom = models.CharField(max_length=200)
+    Prenom = models.CharField(max_length=200)
+    Credit = models.DecimalField(default=0, max_digits=6, decimal_places=2)
+    Paiement = models.IntegerField(default=0)
+    Compte = models.CharField(max_length=10, default="")
 
 class Products(models.Model):
     codeProduit = models.CharField(max_length=200)
@@ -50,6 +51,7 @@ class Products(models.Model):
     quantiteMin = models.PositiveIntegerField()
     packaging = models.PositiveIntegerField()
     prix = models.PositiveIntegerField()
+    exclusivite = models.CharField(max_length=200, default="")
     
 class ProductsEco(models.Model):
     codeProduit = models.CharField(max_length=200)

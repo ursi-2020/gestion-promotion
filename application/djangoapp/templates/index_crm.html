@@ -1,1 +1,1 @@
-{% extends "base.html" %} {% block content %} {% for c in list_customers %} {{ c.id }} {{ c.firstName }} {{ c.lastName }} {{ c.fidelityPoint }} {{ c.account }} {{ c.payment }} {{ value|linebreaks }} {% endfor %} {% endblock %}
+{% extends "base.html" %} {% block content %} {% for c in list_customers %} {{ c.id }} {{ c.IdClient }} {{ c.Nom }} {{ c.Prenom }} {{ c.Credit }} {{ c.Paiement }} {{ c.Compte }} {{ value|linebreaks }} {% endfor %} {% endblock %}

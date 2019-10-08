@@ -52,7 +52,7 @@ def loadproduct(request):
             print(str(products))
             p = json.loads(products)
             for c in p['produits']:
-                record = Products(id = c['id'], codeProduit = c['codeProduit'], familleProduit = c['familleProduit'], descriptionProduit = c['descriptionProduit'], quantiteMin = c['quantiteMin'], packaging = c['packaging'], prix = c['prix'])
+                record = Products(id = c['id'], codeProduit = c['codeProduit'], familleProduit = c['familleProduit'], descriptionProduit = c['descriptionProduit'], quantiteMin = c['quantiteMin'], packaging = c['packaging'], prix = c['prix'], exclusivite = c['exclusivite'])
                 record.save()
 
     if request.method == 'POST' or request.method == 'GET':

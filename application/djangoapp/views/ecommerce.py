@@ -22,7 +22,7 @@ def indexpromoeco(request):
     d = { 
             "list_products": data
         }
-    return render(request, 'index_product_eco.html', d)
+    return render(request, 'index_promo_eco.html', d)
 
 # Dispatcher of promotion ecommerce resources
 @csrf_exempt

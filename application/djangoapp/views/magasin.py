@@ -22,7 +22,7 @@ def indexpromomag(request):
     d = { 
             "list_products": data
         }
-    return render(request, 'index_product_mag.html', d)
+    return render(request, 'index_promo_mag.html', d)
 
 # Dispatcher of promotion magasin resources
 @csrf_exempt

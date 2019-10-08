@@ -16,11 +16,12 @@ class PromotionIdForm(forms.Form):
     productId = forms.IntegerField(min_value=1, required=False, initial=1)
 
 class CustomerForm(forms.Form):
-    firstName = forms.CharField(max_length=200)
-    lastName = forms.CharField(max_length=200)
-    fidelityPoint = forms.IntegerField(initial=0)
-    payment = forms.IntegerField(initial=0)
-    account = forms.CharField(max_length=10, initial="")
+    IdClient = forms.TextField(default="")
+    Nom = forms.CharField(max_length=200)
+    Prenom = forms.CharField(max_length=200)
+    Credit = forms.DecimalField(default=0, max_digits=6, decimal_places=2)
+    Paiement = forms.IntegerField(default=0)
+    Compte = forms.CharField(max_length=10, default="")
 
 class Products(forms.Form):
     codeProduit = forms.CharField(max_length=200)
@@ -29,6 +30,7 @@ class Products(forms.Form):
     quantiteMin = forms.IntegerField(min_value = 0)
     packaging = forms.IntegerField(min_value = 0)
     prix = forms.IntegerField(min_value = 0)
+    exclusivite = forms.CharField(max_length=200, default="")
 
 class ProductsEco(forms.Form):
     codeProduit = forms.CharField(max_length=200)
