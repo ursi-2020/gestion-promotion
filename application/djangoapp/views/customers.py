@@ -32,6 +32,6 @@ def loadcrm(request):
             Customers.objects.all().delete()
             customers = json.loads(customers)
             for c in customers:
-                record = Customers(id = c['id'], IdClient = c['IdClient'], Nom = c['Nom'], Prenom = c['Prenom'], Credit = c['Credit'], Paiement = c['Paiement'], Compte = c['Compte'])
+                record = Customers(id = c['id'], IdClient = c['IdClient'], Nom = c['Nom'], Prenom = c['Prenom'], Credit = c['Credit'], Paiement = c['Paiement'], Compte = c['Compte'], carteFid=c['carteFid'])
                 record.save()
     return render(request, 'home.html')
