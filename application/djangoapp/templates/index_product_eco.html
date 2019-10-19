@@ -1,1 +1,25 @@
-{% extends "base.html" %} {% block content %} {% for c in list_products %} {{ c.id }} {{ c.codeProduit }} {{ c.familleProduit }} {{ c.descriptionProduit }} {{ c.quantiteMin }} {{ c.packaging }} {{ c.prix }} {{ value|linebreaks }} {% endfor %} {% endblock%}
+{% extends "base.html" %} {% block content %}
+<table>
+    <tr>
+        <th>id</th>
+        <th>codeProduit</th>
+        <th>familleProduit</th>
+        <th>descriptionProduit</th>
+        <th>quantiteMin</th>
+        <th>packaging</th>
+        <th>prix</th>
+    </tr>
+{% for c in list_products %}
+<tr>
+    <th>{{ c.id }}</th> 
+    <th>{{ c.codeProduit }}</th> 
+    <th>{{ c.familleProduit }}</th> 
+    <th>{{ c.descriptionProduit }}</th> 
+    <th>{{ c.quantiteMin }}</th> 
+    <th>{{ c.packaging }}</th> 
+    <th>{{ c.prix }}</th>
+    <th>{{ value|linebreaks }}</th>
+</tr>
+{% endfor %}
+</table>
+{% endblock%}
