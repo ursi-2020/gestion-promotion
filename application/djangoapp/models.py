@@ -7,6 +7,8 @@ class PromotionsEco(models.Model):
     quantiteMin = models.PositiveIntegerField()
     packaging = models.PositiveIntegerField()
     prix = models.PositiveIntegerField()
+    prixOriginel = models.PositiveIntegerField()
+    reduction = models.PositiveIntegerField()
 
 class PromotionsMag(models.Model):
     codeProduit = models.CharField(max_length=200)
@@ -15,6 +17,8 @@ class PromotionsMag(models.Model):
     quantiteMin = models.PositiveIntegerField()
     packaging = models.PositiveIntegerField()
     prix = models.PositiveIntegerField()
+    prixOriginel = models.PositiveIntegerField()
+    reduction = models.PositiveIntegerField()
 
 class Article(models.Model):
     nom = models.CharField(max_length=200)
