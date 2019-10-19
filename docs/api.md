@@ -30,6 +30,8 @@ The gestion-promotion home page contains following elements :
 
 **Success Response code:** `200 OK`
 
+The price "prix" given in the json, is the price with the promotion already applied.
+
 **Content examples:**
 
 ```json
@@ -70,6 +72,8 @@ Get all magasins promotions
 **Auth required** : NO
 
 **Success Response code:** `200 OK`
+
+The price "prix" given in the json, is the price with the promotion already applied.
 
 **Content examples:**
 
