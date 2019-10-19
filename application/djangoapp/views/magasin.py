@@ -41,7 +41,7 @@ def calcPromoMag(request):
     price = eco_random.prix - eco_random.prix * (promo / 100)
     p = PromotionsMag(codeProduit = eco_random.codeProduit, familleProduit = eco_random.familleProduit,
                         descriptionProduit = eco_random.descriptionProduit, quantiteMin = eco_random.quantiteMin,
-                        packaging = eco_random.packaging, prix = price)
+                        packaging = eco_random.packaging, prix = price, prixOriginel = eco_random.prix, reduction = promo)
     p.save()
     
     eco_random_2 = ProductsMag.objects.all()[randint(0, count - 1)]
@@ -52,7 +52,7 @@ def calcPromoMag(request):
     price = eco_random_2.prix - eco_random_2.prix * (promo / 100)
     p = PromotionsMag(codeProduit = eco_random_2.codeProduit, familleProduit = eco_random_2.familleProduit,
                         descriptionProduit = eco_random_2.descriptionProduit, quantiteMin = eco_random_2.quantiteMin,
-                        packaging = eco_random_2.packaging, prix = price)
+                        packaging = eco_random_2.packaging, prix = price, prixOriginel = eco_random_2.prix, reduction = promo)
     p.save()
     
     return HttpResponse("The two promos were successfully created")
