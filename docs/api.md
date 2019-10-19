@@ -44,7 +44,9 @@ The price "prix" given in the json, is the price with the promotion already appl
       "descriptionProduit": "Console:P3-1",
       "quantiteMin": 5,
       "packaging": 1,
-      "prix": 154,
+      "prix": 225,
+      "prixOriginel": 250,
+      "reduction": 10,
     },
     {
       "id": 3290,
@@ -53,7 +55,9 @@ The price "prix" given in the json, is the price with the promotion already appl
       "descriptionProduit": "Frigos:P1-0",
       "quantiteMin": 15,
       "packaging": 2,
-      "prix": 424,
+      "prix": 230,
+      "prixOriginel": 250,
+      "reduction": 8,
     },
   ]
 }
@@ -87,7 +91,9 @@ The price "prix" given in the json, is the price with the promotion already appl
       "descriptionProduit": "Console:P3-1",
       "quantiteMin": 5,
       "packaging": 1,
-      "prix": 154,
+      "prix": 225,
+      "prixOriginel": 250,
+      "reduction": 10,
     },
     {
       "id": 3290,
@@ -96,7 +102,9 @@ The price "prix" given in the json, is the price with the promotion already appl
       "descriptionProduit": "Frigos:P1-0",
       "quantiteMin": 15,
       "packaging": 2,
-      "prix": 424,
+      "prix": 230,
+      "prixOriginel": 250,
+      "reduction": 8,
     },
   ]
 }
