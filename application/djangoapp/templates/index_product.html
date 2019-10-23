@@ -1,27 +1,29 @@
 {% extends "base.html" %} {% block content %}
-<table>
+{% load tags %}
+<div style="margin: 20px;">
+    <table class="table table-bordered table-dark table-hover">
+        <tr>
+            <th>id</th>
+            <th>codeProduit</th>
+            <th>familleProduit</th>
+            <th>descriptionProduit</th>
+            <th>quantiteMin</th>
+            <th>packaging</th>
+            <th>prix</th>
+            <th>exclusivite</th>
+        </tr>
+    {% for c in list_products %}
     <tr>
-        <th>id</th>
-        <th>codeProduit</th>
-        <th>familleProduit</th>
-        <th>descriptionProduit</th>
-        <th>quantiteMin</th>
-        <th>packaging</th>
-        <th>prix</th>
-        <th>exclusivite</th>
+        <th>{{ c.id }}</th> 
+        <th>{{ c.codeProduit }}</th> 
+        <th>{{ c.familleProduit }}</th> 
+        <th>{{ c.descriptionProduit }}</th> 
+        <th>{{ c.quantiteMin }}</th> 
+        <th>{{ c.packaging }}</th> 
+        <th>{{ c.prix|div:100 }}</th>
+        <th>{{ c.exclusivite }}</th>
     </tr>
-{% for c in list_products %}
-<tr>
-    <th>{{ c.id }}</th> 
-    <th>{{ c.codeProduit }}</th> 
-    <th>{{ c.familleProduit }}</th> 
-    <th>{{ c.descriptionProduit }}</th> 
-    <th>{{ c.quantiteMin }}</th> 
-    <th>{{ c.packaging }}</th> 
-    <th>{{ c.prix }}</th>
-    <th>{{ c.exclusivite }}</th>
-    <th>{{ value|linebreaks }}</th>
-</tr>
-{% endfor %}
-</table>
+    {% endfor %}
+    </table>
+</div>
 {% endblock%}
