@@ -20,7 +20,7 @@ urlpatterns = [
 
     # Private routes
 
-    # Calculte promotions Ecommerce
+    # Calculate promotions Ecommerce
     path('promo/ecommerce/calc', e.calcPromoEco, name='calcPromoEco'),
 
     #Calculate promotions Magasin

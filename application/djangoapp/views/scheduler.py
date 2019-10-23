@@ -27,10 +27,10 @@ def refresh(request):
     time = datetime.strptime(clock_time, '"%d/%m/%Y-%H:%M:%S"')
     time = time + timedelta(minutes=10)
     # Refreshes Customers
-    schedule_task("gestion-promotion", "admin/crm/loadcrm", time, "minute", {}, "gestion-promotion", "loadcrm")
+    schedule_task("gestion-promotion", "admin/crm/loadcrm", time, "day", {}, "gestion-promotion", "loadcrm")
 
     # Refreshes Products
-    schedule_task("gestion-promotion", "admin/product/loadproduct", time, "minute", {}, "gestion-promotion", "loadproduct")
+    schedule_task("gestion-promotion", "admin/product/loadproduct", time, "day", {}, "gestion-promotion", "loadproduct")
 
     # Refreshes Promotions for Ecommerce everydays
     schedule_task("gestion-promotion", "promo/ecommerce/calc", time, "day", {}, "gestion-promotion", "Calc ecommerce promos")
