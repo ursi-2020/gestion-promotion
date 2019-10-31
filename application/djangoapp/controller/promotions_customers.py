@@ -7,9 +7,8 @@ import json
 
 from django.views.decorators.csrf import csrf_exempt
 
-
-# PromotionsEco - Index
+# PromotionsCustomers - Index
 # Display a listing of the resource.
 def index(request):
-    data = serializers.serialize("json", PromotionsEco.objects.all())
+    data = serializers.serialize("json", PromotionsCustomers.objects.all())
     return HttpResponse(json.dumps(data),content_type='application/json')

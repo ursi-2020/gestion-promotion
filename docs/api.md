@@ -119,7 +119,7 @@ Get all magasins promotions
 
 **Service name** : `gestion-promotion`
 
-**URL** : `promo/userpromo`
+**URL** : `promo/customers`
 
 **Method** : `GET`
 

@@ -1,16 +1,16 @@
 from django.urls import path
 
 from application.djangoapp.views import customers as c
-from application.djangoapp.views import ecommerce as e
-from application.djangoapp.views import magasin as m
+from application.djangoapp.views.promotions import ecommerce as e
+from application.djangoapp.views.promotions import magasin as m
+from application.djangoapp.views.promotions import customers as pc
 from application.djangoapp.views import products as p
 from application.djangoapp.views import scheduler as s
 from application.djangoapp.views import tools as t
 
-
 urlpatterns = [
 
-    # Public routes
+    # # # Public routes
 
     # Promotions Ecommerce
     path('promo/ecommerce', e.promoEco, name='promoEco'),
@@ -18,7 +18,10 @@ urlpatterns = [
     # Promotions Magasin
     path('promo/magasin', m.promoMag, name='promoMag'),
 
-    # Private routes
+    # Promotions Targeted to Customers
+    path('promo/customers', pc.promoCustomers, name='promoCustomers'),
+
+    # # # Private routes
 
     # Calculate promotions Ecommerce
     path('promo/ecommerce/calc', e.calcPromoEco, name='calcPromoEco'),
@@ -26,10 +29,13 @@ urlpatterns = [
     #Calculate promotions Magasin
     path('promo/magasin/calc', m.calcPromoMag, name='calcPromoMag'),
 
+    #Compute targeted promotions client
+    path('promo/customers/calc', pc.calcPromoCustomers, name='calcPromoCustomers'),
+
     # Display promotions
     path('promo/magasin/indexpromomag', m.indexpromomag, name='indexpromomag'),
     path('promo/ecommerce/indexpromoeco', e.indexpromoeco, name='indexpromoeco'),
-
+    path('promo/customers/indexpromocustomers', pc.indexpromocustomers, name="indexpromocustomers"),
 
     # Clear all datas from databases
     path('admin/clear', t.clear, name="clear"),

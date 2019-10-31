@@ -13,6 +13,7 @@ from application.djangoapp.models import *
 def clear(request):
     PromotionsMag.objects.all().delete()
     PromotionsEco.objects.all().delete()
+    PromotionsCustomers.objects.all().delete()
 
     ProductsMag.objects.all().delete()
     ProductsEco.objects.all().delete()  

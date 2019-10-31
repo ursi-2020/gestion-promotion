@@ -1,25 +1,5 @@
 from django.db import models
 
-class PromotionsEco(models.Model):
-    codeProduit = models.CharField(max_length=200)
-    familleProduit = models.CharField(max_length=200)
-    descriptionProduit = models.CharField(max_length=200)
-    quantiteMin = models.PositiveIntegerField()
-    packaging = models.PositiveIntegerField()
-    prix = models.PositiveIntegerField()
-    prixOriginel = models.PositiveIntegerField(default=0)
-    reduction = models.PositiveIntegerField(default=0)
-
-class PromotionsMag(models.Model):
-    codeProduit = models.CharField(max_length=200)
-    familleProduit = models.CharField(max_length=200)
-    descriptionProduit = models.CharField(max_length=200)
-    quantiteMin = models.PositiveIntegerField()
-    packaging = models.PositiveIntegerField()
-    prix = models.PositiveIntegerField()
-    prixOriginel = models.PositiveIntegerField(default=0)
-    reduction = models.PositiveIntegerField(default=0)
-
 class Article(models.Model):
     nom = models.CharField(max_length=200)
     stock = models.PositiveIntegerField()
@@ -36,10 +16,45 @@ class Vente(models.Model):
         return 'Vente: {} - {}'.format(self.article.nom, self.date)
 
 
-class Users(models.Model):
-    email = models.CharField(max_length=200)
-    password = models.CharField(max_length=200)
+# # # All models for handling promotions in this app
 
+# contains all promotions for ecommerce
+class PromotionsEco(models.Model):
+    codeProduit = models.CharField(max_length=200)
+    familleProduit = models.CharField(max_length=200)
+    descriptionProduit = models.CharField(max_length=200)
+    quantiteMin = models.PositiveIntegerField()
+    packaging = models.PositiveIntegerField()
+    prix = models.PositiveIntegerField()
+    prixOriginel = models.PositiveIntegerField(default=0)
+    reduction = models.PositiveIntegerField(default=0)
+
+# contains all promotions for magasin
+class PromotionsMag(models.Model):
+    codeProduit = models.CharField(max_length=200)
+    familleProduit = models.CharField(max_length=200)
+    descriptionProduit = models.CharField(max_length=200)
+    quantiteMin = models.PositiveIntegerField()
+    packaging = models.PositiveIntegerField()
+    prix = models.PositiveIntegerField()
+    prixOriginel = models.PositiveIntegerField(default=0)
+    reduction = models.PositiveIntegerField(default=0)
+
+# contains all promotions targeted to customers
+class PromotionsCustomers(models.Model):
+    IdClient = models.TextField(blank=False)
+    Nom = models.CharField(max_length=200)
+    Prenom = models.CharField(max_length=200)
+    Credit = models.DecimalField(default=0, max_digits=6, decimal_places=2)
+    Paiement = models.IntegerField(default=0)
+    Compte = models.CharField(max_length=10, default="")
+    carteFid = models.IntegerField(default=-1)
+    reduction = models.IntegerField(default=0)
+
+
+# # # All models to save all datas got from other apps
+
+# contains all customers from CRM
 class Customers(models.Model):
     IdClient = models.TextField(blank=False)
     Nom = models.CharField(max_length=200)
@@ -49,6 +64,7 @@ class Customers(models.Model):
     Compte = models.CharField(max_length=10, default="")
     carteFid = models.IntegerField(default=-1)
 
+# contains all products from catalogue-produit
 class Products(models.Model):
     codeProduit = models.CharField(max_length=200)
     familleProduit = models.CharField(max_length=200)
@@ -58,6 +74,7 @@ class Products(models.Model):
     prix = models.PositiveIntegerField()
     exclusivite = models.CharField(max_length=200, default="")
     
+# contains all ecommerce products from catalogue-produit
 class ProductsEco(models.Model):
     codeProduit = models.CharField(max_length=200)
     familleProduit = models.CharField(max_length=200)
@@ -66,6 +83,8 @@ class ProductsEco(models.Model):
     packaging = models.PositiveIntegerField()
     prix = models.PositiveIntegerField()
 
+
+# contains all magasin products from catalogue-produit
 class ProductsMag(models.Model):
     codeProduit = models.CharField(max_length=200)
     familleProduit = models.CharField(max_length=200)
