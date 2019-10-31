@@ -1,5 +1,7 @@
 [Sommaire](https://ursi-2020.github.io/Documentation/)
 
+*[Go back](index.md)*
+
 # Gestion-promotions-app
 
 This application manage all data to create promotions.
@@ -110,3 +112,46 @@ The price "prix" given in the json, is the price with the promotion already appl
 }
 ```
 
+
+## Get all user targeted promotions
+
+Get all magasins promotions
+
+**Service name** : `gestion-promotion`
+
+**URL** : `promo/userpromo`
+
+**Method** : `GET`
+
+**Auth required** : NO
+
+**Success Response code:** `200 OK`
+
+The reduction is the one to applied for the shopphing cart in percent.
+
+**Content examples:**
+
+```json
+[
+  {
+    "IdClient": "a14e39ce-e29e-11e9-a8cb-08002751d198",
+    "Nom": "Jacquie",
+    "Prenom": "Bloggs",
+    "Credit": "42,00",
+    "Paiement": 0,
+    "Compte": "BKN1CST53",
+    "carteFid": 33,
+    "reduction": 5
+  },
+  {
+    "IdClient": "a14f4a08-e29e-11e9-a8cb-08002751d198",
+    "Nom": "Michelle",
+    "Prenom": "Bigoudi",
+    "Credit": "69,00",
+    "Paiement": 3,
+    "Compte": "",
+    "carteFid": 42,
+    "reduction": 20
+  }
+]
+```

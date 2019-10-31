@@ -3,6 +3,7 @@
 # Sections
 
 *[API](api.md)*
+*[SCHEDULING](schedule.md)*
 
 # Rôle de l'application
 
