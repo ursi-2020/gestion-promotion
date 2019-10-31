@@ -1,5 +1,7 @@
 [Sommaire](https://ursi-2020.github.io/Documentation/)
 
+*[Go back](index.md)*
+
 There is several scheduling for managing promotions :
 - everydays update the customers with calling CRM
 - everydays update the products with calling catalogue produit
