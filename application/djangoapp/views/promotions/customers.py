@@ -13,7 +13,7 @@ from django.core import serializers
 from application.djangoapp.models import *
 from django.views.decorators.csrf import csrf_exempt
 
-from application.djangoapp.controller import promotions_cutomers as cutomers
+from application.djangoapp.controller import promotions_customers as cutomers
 
 
 # Display all target promotions for customers
@@ -56,4 +56,4 @@ def calcPromoCustomers(request):
     #                     packaging = eco_random_2.packaging, prix = price, prixOriginel = eco_random_2.prix, reduction = promo)
     # p.save()
     
-    return HttpResponse("The two promos were successfully created")
+    return render(request, 'home.html')

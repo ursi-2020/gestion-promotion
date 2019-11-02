@@ -54,6 +54,8 @@ class PromotionsCustomers(models.Model):
 
 # # # All models to save all datas got from other apps
 
+# # From CRM
+
 # contains all customers from CRM
 class Customers(models.Model):
     IdClient = models.TextField(blank=False)
@@ -63,6 +65,8 @@ class Customers(models.Model):
     Paiement = models.IntegerField(default=0)
     Compte = models.CharField(max_length=10, default="")
     carteFid = models.IntegerField(default=-1)
+
+# #From catalagoeu-produit
 
 # contains all products from catalogue-produit
 class Products(models.Model):

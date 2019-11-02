@@ -8,19 +8,24 @@
     <form action='{{ HTTP_HOST }}/promo/ecommerce/indexpromoeco' method='GET'>
         <button type='submit'> INDEX PROMO ECOMMERCE </button> Afficher toutes les promotions d'ecommerce enregistrées dans l'application
     </form>
-    
+    <form action='{{ HTTP_HOST }}/promo/ecommerce/calc' method='GET'>
+        {% csrf_token %}
+        <button type='submit'> LOAD PROMO ECOMMERCE </button> Charger deux promotions ecommerce
+    </form>
+    <br>
     <form action='{{ HTTP_HOST }}/promo/magasin/indexpromomag' method='GET'>
         <button type='submit'> INDEX PROMO MAGASIN </button> Afficher toutes les promotions de magasin enregistrées dans l'application
     </form>
-    
     <form action='{{ HTTP_HOST }}/promo/magasin/calc' method='GET'>
         {% csrf_token %}
-        <button type='submit'> LOAD MAGASIN </button> Charger deux promotions magasins
+        <button type='submit'> LOAD PROMO MAGASIN </button> Charger deux promotions magasins
     </form>
-    
-    <form action='{{ HTTP_HOST }}/promo/ecommerce/calc' method='GET'>
-        {% csrf_token %}
-        <button type='submit'> LOAD ECOMMERCE </button> Charger deux promotions ecommerce
+    <br>
+    <form action='{{ HTTP_HOST }}/promo/customers/indexpromocustomers' method='GET'>
+        <button type='submit'> INDEX PROMO CUSTOMERS </button> Afficher toutes les promotions ciblées clients enregistrées dans l'application
+    </form>
+    <form action='{{ HTTP_HOST }}/promo/customers/calc' method='GET'>
+        <button type='submit'> LOAD PROMO CUSTOMERS </button> Afficher toutes les promotions ciblées clients enregistrées dans l'application
     </form>
     
     <h1>CRM</h1>
@@ -54,7 +59,15 @@
     <h1>SCHEDULER</h1>
     <form action='{{ HTTP_HOST }}/admin/refresh' method='POST'>
         {% csrf_token %}
-        <button type='submit'> REFRESH DATAS </button> Programmer une actualisation des données enregistrées dans gestion des promotions en les redemandant à CRM et catalogue-produit
+        <button type='submit'> REFRESH DATAS </button>
+        <br>Programme plusieurs tâches :
+            <br><span style="padding-left: 25px">- actualisation des données :</span>
+            <br><span style="padding-left: 50px">- catalogue-produit</span>
+            <br><span style="padding-left: 50px">- crm</span>
+            <br><span style="padding-left: 25px">- créé deux promotions produits aléatoires :</span>
+            <br><span style="padding-left: 50px">- magasin</span>
+            <br><span style="padding-left: 50px">- e-commerce</span>
+            <br><span style="padding-left: 25px">- créé des promotions ciblées clients</span>
     </form>
     
     <h1>DELETE ALL DATAS FROM ALL DATABASES</h1>
@@ -63,6 +76,4 @@
         <button type='submit'> CLEAR ALL </button> Supprimer TOUTES les données enregistrées dans l'application /!\ Attention cette action est irréversible /!\
     </form>
 </div>
-
-    
 {% endblock %}

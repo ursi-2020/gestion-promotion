@@ -1,0 +1,28 @@
+{% extends "base.html" %} {% block content %}
+<div style="margin: 20px;">
+    <table class="table table-bordered table-dark table-hover">
+        <tr>
+            <th>id</th>
+            <th>IdClient</th>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>Credit</th>
+            <th>Paiement</th>
+            <th>Compte</th>
+            <th>carteFid</th>
+            <th>reduction</th>
+        </tr>
+    {% for c in list_promotions %}
+        <th>{{ c.id }}</th> 
+        <th>{{ c.IdClient }}</th> 
+        <th>{{ c.Nom }}</th> 
+        <th>{{ c.Prenom }}</th> 
+        <th>{{ c.Credit }}</th> 
+        <th>{{ c.Paiement }}</th> 
+        <th>{{ c.Compte }}</th> 
+        <th>{{ c.carteFid }}</th>
+        <th>{{ reduction }}</th>
+    {% endfor %}
+    </table>
+</div>
+{% endblock %}
