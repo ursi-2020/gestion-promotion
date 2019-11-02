@@ -10,15 +10,6 @@ from application.djangoapp.models import *
 from django.shortcuts import redirect
 from django.shortcuts import render
 
-# Function to schedule tasks given by the SOC
-def schedule_task(host, url, time, recurrence, data, source, name):
-    time_str = time.strftime('%d/%m/%Y-%H:%M:%S')
-    headers = {'Host': 'scheduler'}
-    data = {"target_url": url, "target_app": host, "time": time_str, "recurrence": recurrence, "data": data, "source_app": source, "name": name}
-    r = requests.post(api.api_services_url + 'schedule/add', headers = headers, json = data)
-    print(r.status_code)
-    print(r.text)
-    return r.text
 
 
 # Refreshes the two databases Products and Customers in posting to CRM and catalogue-produit to refresh all datas
@@ -27,15 +18,18 @@ def refresh(request):
     time = datetime.strptime(clock_time, '"%d/%m/%Y-%H:%M:%S"')
     time = time + timedelta(minutes=10)
     # Refreshes Customers
-    schedule_task("gestion-promotion", "admin/crm/loadcrm", time, "day", {}, "gestion-promotion", "loadcrm")
+    api.schedule_task("gestion-promotion", "admin/crm/loadcrm", time, "day", {}, "gestion-promotion", "Promo: Update CRM")
 
     # Refreshes Products
-    schedule_task("gestion-promotion", "admin/product/loadproduct", time, "day", {}, "gestion-promotion", "loadproduct")
+    api.schedule_task("gestion-promotion", "admin/product/loadproduct", time, "day", {}, "gestion-promotion", "Promo: Update product")
 
     # Refreshes Promotions for Ecommerce everydays
-    schedule_task("gestion-promotion", "promo/ecommerce/calc", time, "day", {}, "gestion-promotion", "Calc ecommerce promos")
+    api.schedule_task("gestion-promotion", "promo/ecommerce/calc", time, "day", {}, "gestion-promotion", "Promo: ecommerce promo")
 
     # Refreshes Promotions for Magasin everydays
-    schedule_task("gestion-promotion", "promo/magasin/calc", time, "day", {}, "gestion-promotion", "Calc magasin promos")
+    api.schedule_task("gestion-promotion", "promo/magasin/calc", time, "day", {}, "gestion-promotion", "Promo: magasin promo")
+    
+    # Refreshes Promotions for targeted customers everydays
+    api.schedule_task("gestion-promotion", "promo/customers/calc", time, "day", {}, "gestion-promotion", "Promo: customers promo")
 
     return render(request, 'home.html')

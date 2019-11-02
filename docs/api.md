@@ -127,7 +127,7 @@ Get all magasins promotions
 
 **Success Response code:** `200 OK`
 
-The reduction is the one to applied for the shopphing cart in percent.
+The reduction is the one to applied for the shopphing cart in percent. All the other fields are provided by CRM.
 
 **Content examples:**
 
@@ -139,7 +139,12 @@ The reduction is the one to applied for the shopphing cart in percent.
     "Prenom": "Bloggs",
     "Credit": "42,00",
     "Paiement": 0,
+    "NbRefus": 5,
+    "Arembourser": 0,
     "Compte": "BKN1CST53",
+    "Age": 29,
+    "Sexe": "F",
+    "Email": "bibalou@wanadoo.fr",
     "carteFid": 33,
     "reduction": 5
   },
@@ -149,7 +154,12 @@ The reduction is the one to applied for the shopphing cart in percent.
     "Prenom": "Bigoudi",
     "Credit": "69,00",
     "Paiement": 3,
+    "NbRefus": 5,
+    "Arembourser": 0,
     "Compte": "",
+    "Age": 54,
+    "Sexe": "H",
+    "Email": "lalaland@gmail.com",
     "carteFid": 42,
     "reduction": 20
   }

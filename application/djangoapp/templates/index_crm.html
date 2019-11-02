@@ -12,14 +12,21 @@
             <th>carteFid</th>
         </tr>
     {% for c in list_customers %}
+    <tr>
         <th>{{ c.id }}</th> 
         <th>{{ c.IdClient }}</th> 
         <th>{{ c.Nom }}</th> 
         <th>{{ c.Prenom }}</th> 
         <th>{{ c.Credit }}</th> 
         <th>{{ c.Paiement }}</th> 
+        <th>{{ c.NbRefus }}</th> 
+        <th>{{ c.Arembourser }}</th> 
         <th>{{ c.Compte }}</th> 
+        <th>{{ c.Age }}</th> 
+        <th>{{ c.Sexe }}</th> 
+        <th>{{ c.Email }}</th> 
         <th>{{ c.carteFid }}</th>
+    </tr>
     {% endfor %}
     </table>
 </div>

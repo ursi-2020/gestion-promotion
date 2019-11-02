@@ -13,8 +13,7 @@ from django.core import serializers
 from application.djangoapp.models import *
 from django.views.decorators.csrf import csrf_exempt
 
-from application.djangoapp.controller import promotions_customers as cutomers
-
+from application.djangoapp.controller import promotions_customers as customers
 
 # Display all target promotions for customers
 def indexpromocustomers(request):
@@ -34,26 +33,14 @@ def promoCustomers(request):
 
 # Compute targeted client Promotions
 def calcPromoCustomers(request):
-    # PromotionsEco.objects.all().delete()
-    # count = ProductsEco.objects.count()
-    # eco_random = ProductsEco.objects.all()[randint(0, count - 1)]
-    
-    # promo = randint(5, 15)
-    # price = eco_random.prix - eco_random.prix * (promo / 100)
-    # p = PromotionsEco(codeProduit = eco_random.codeProduit, familleProduit = eco_random.familleProduit,
-    #                     descriptionProduit = eco_random.descriptionProduit, quantiteMin = eco_random.quantiteMin,
-    #                     packaging = eco_random.packaging, prix = price, prixOriginel = eco_random.prix, reduction = promo)
-    # p.save()
-    
-    # eco_random_2 = ProductsEco.objects.all()[randint(0, count - 1)]
-    # while (eco_random_2 == eco_random):
-    #     eco_random_2 = ProductsEco.objects.all()[randint(0, count - 1)]
-    
-    # promo = randint(5, 15)
-    # price = eco_random_2.prix - eco_random_2.prix * (promo / 100)
-    # p = PromotionsEco(codeProduit = eco_random_2.codeProduit, familleProduit = eco_random_2.familleProduit,
-    #                     descriptionProduit = eco_random_2.descriptionProduit, quantiteMin = eco_random_2.quantiteMin,
-    #                     packaging = eco_random_2.packaging, prix = price, prixOriginel = eco_random_2.prix, reduction = promo)
-    # p.save()
-    
+    PromotionsCustomers.objects.all().delete()
+    # it's a try
+    cu = Customers.objects.filter(Nom='Sarkozy-51')
+    for c in cu:
+        if c.Nom == 'Sarkozy-51':
+            print('ouiii')
+        new_promo = PromotionsCustomers(id = c['id'], IdClient = c['IdClient'], Nom = c['Nom'], Prenom = c['Prenom'], Credit = c['Credit'], Paiement = c['Paiement'], NbRefus = c['NbRefus'], Arembourser = c['Arembourser'], Compte = c['Compte'], Age = c['Age'], Sexe = c['Sexe'], Email = c['Email'], carteFid=c['carteFid'], reduction = 50)
+        new_promo.save()
     return render(request, 'home.html')
+
+api.send_request('gestion-promotion', 'promo/customers/calc')

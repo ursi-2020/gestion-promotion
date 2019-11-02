@@ -13,6 +13,7 @@
             <th>reduction</th>
         </tr>
     {% for c in list_promotions %}
+    <tr>
         <th>{{ c.id }}</th> 
         <th>{{ c.IdClient }}</th> 
         <th>{{ c.Nom }}</th> 
@@ -22,6 +23,7 @@
         <th>{{ c.Compte }}</th> 
         <th>{{ c.carteFid }}</th>
         <th>{{ reduction }}</th>
+    </tr>
     {% endfor %}
     </table>
 </div>
