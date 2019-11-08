@@ -44,6 +44,7 @@ urlpatterns = [
     path('promo/magasin/indexpromomag', m.indexpromomag, name='indexpromomag'),
     path('promo/ecommerce/indexpromoeco', e.indexpromoeco, name='indexpromoeco'),
     path('promo/customers/indexpromocustomers', pc.indexpromocustomers, name="indexpromocustomers"),
+    path('promo/customers/indexpromocustomersproducts', ppc.indexpromocustomersproducts, name="indexpromocustomersproducts"),
 
     # Clear all datas from databases
     path('admin/clear', t.clear, name="clear"),
