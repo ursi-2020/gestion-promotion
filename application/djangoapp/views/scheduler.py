@@ -23,6 +23,9 @@ def refresh(request):
     # Refreshes Products
     api.schedule_task("gestion-promotion", "admin/product/loadproduct", time, "day", {}, "gestion-promotion", "Promo: Update product")
 
+    # Refreshes Tickets everydays
+    api.schedule_task("gestion-promotion", "admin/tickets/loadtickets", time, "day", {}, "gestion-promotion", "Promo: Update tickets")
+
     # Refreshes Promotions for Ecommerce everydays
     api.schedule_task("gestion-promotion", "promo/ecommerce/calc", time, "day", {}, "gestion-promotion", "Promo: ecommerce promo")
 
@@ -31,5 +34,9 @@ def refresh(request):
     
     # Refreshes Promotions for targeted customers everydays
     api.schedule_task("gestion-promotion", "promo/customers/calc", time, "day", {}, "gestion-promotion", "Promo: customers promo")
+    
+    # Refreshes Promotions for targeted customers products everydays
+    api.schedule_task("gestion-promotion", "promo/customersproducts/calc", time, "day", {}, "gestion-promotion", "Promo: customers products promo")
+    
 
     return render(request, 'home.html')

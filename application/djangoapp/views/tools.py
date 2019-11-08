@@ -14,12 +14,14 @@ def clear(request):
     PromotionsMag.objects.all().delete()
     PromotionsEco.objects.all().delete()
     PromotionsCustomers.objects.all().delete()
+    PromotionsCustomersProducts.objects.all.delete()
 
     ProductsMag.objects.all().delete()
     ProductsEco.objects.all().delete()  
     Products.objects.all().delete()
 
     Customers.objects.all().delete()
+    Tickets.objects.all().delete()
     return render(request, 'home.html')
 
 # Home page

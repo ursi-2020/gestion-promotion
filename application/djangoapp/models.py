@@ -56,6 +56,11 @@ class PromotionsCustomers(models.Model):
     carteFid = models.IntegerField(default=-1)
     reduction = models.IntegerField(default=0)
 
+class PromotionsCustomersProducts(models.Model):
+    IdClient = models.TextField(blank=False)
+    codeProduit = models.CharField(max_length=20)
+    quantity = models.IntegerField(default = 0)
+    reduction = models.IntegerField(default = 0)
 
 # # # All models to save all datas got from other apps
 
@@ -76,7 +81,22 @@ class Customers(models.Model):
     Email = models.CharField(max_length=200, default="")
     carteFid = models.IntegerField(default=-1)
 
-# #From catalagoeu-produit
+# contains all articles in tickets.articles from crm
+class ArticlesList(models.Model):
+    codeProduit = models.CharField(max_length=20)
+    quantity = models.IntegerField()
+
+# contains all the tickets from crm
+class Tickets(models.Model):
+    date = models.DateTimeField()
+    prix = models.IntegerField()
+    client = models.TextField(blank=False)
+    articles = models.ManyToManyField(ArticlesList)
+    pointsFidelite = models.IntegerField()
+    modePaiement = models.CharField(max_length=10)
+    transmis = models.BooleanField()
+
+# # From catalogue-produit
 
 # contains all products from catalogue-produit
 class Products(models.Model):
@@ -106,3 +126,4 @@ class ProductsMag(models.Model):
     quantiteMin = models.PositiveIntegerField()
     packaging = models.PositiveIntegerField()
     prix = models.PositiveIntegerField()
+

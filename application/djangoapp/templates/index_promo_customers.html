@@ -4,25 +4,17 @@
         <tr>
             <th>id</th>
             <th>IdClient</th>
-            <th>Nom</th>
-            <th>Prenom</th>
-            <th>Credit</th>
-            <th>Paiement</th>
-            <th>Compte</th>
-            <th>carteFid</th>
+            <th>codeProduit</th>
+            <th>quantity</th>
             <th>reduction</th>
         </tr>
     {% for c in list_promotions %}
     <tr>
-        <th>{{ c.id }}</th> 
-        <th>{{ c.IdClient }}</th> 
-        <th>{{ c.Nom }}</th> 
-        <th>{{ c.Prenom }}</th> 
-        <th>{{ c.Credit }}</th> 
-        <th>{{ c.Paiement }}</th> 
-        <th>{{ c.Compte }}</th> 
-        <th>{{ c.carteFid }}</th>
-        <th>{{ reduction }}</th>
+        <th>id</th>
+        <th>IdClient</th>
+        <th>codeProduit</th>
+        <th>quantity</th>
+        <th>reduction</th>
     </tr>
     {% endfor %}
     </table>

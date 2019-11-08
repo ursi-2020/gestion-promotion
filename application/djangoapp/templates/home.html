@@ -25,7 +25,14 @@
         <button type='submit'> INDEX PROMO CUSTOMERS </button> Afficher toutes les promotions ciblées clients enregistrées dans l'application
     </form>
     <form action='{{ HTTP_HOST }}/promo/customers/calc' method='GET'>
-        <button type='submit'> LOAD PROMO CUSTOMERS </button> Afficher toutes les promotions ciblées clients enregistrées dans l'application
+        <button type='submit'> LOAD PROMO CUSTOMERS </button> Charger toutes les promotions ciblées clients enregistrées dans l'application
+    </form>
+    <br>
+    <form action='{{ HTTP_HOST }}/promo/customers/indexpromocustomersproducts' method='GET'>
+        <button type='submit'> INDEX PROMO PRODUCT CUSTOMERS </button> Afficher toutes les promotions produits ciblées clients enregistrées dans l'application
+    </form>
+    <form action='{{ HTTP_HOST }}/promo/customersproducts/calc' method='GET'>
+        <button type='submit'> LOAD PROMO CUSTOMERS </button> Charger toutes les promotions ciblées clients enregistrées dans l'application
     </form>
     
     <h1>CRM</h1>
@@ -36,6 +43,16 @@
     <form action='{{ HTTP_HOST }}/admin/crm/loadcrm' method='GET'>
         {% csrf_token %}
         <button type='submit'> LOAD CRM </button> Charger tous les clients provenants de l'application CRM et de les enregistrer dans cette application
+    </form>
+    
+    
+    <form action='{{ HTTP_HOST }}/admin/crm/indextickets' method='GET'>
+        <button type='submit'> INDEX TICKETS </button> Afficher tous les clients enregistrés dans l'application
+    </form>
+
+    <form action='{{ HTTP_HOST }}/admin/crm/loadtickets' method='GET'>
+        {% csrf_token %}
+        <button type='submit'> LOAD TICKETS </button> Charger tous les tickets provenants de l'application CRM et de les enregistrer dans cette application
     </form>
     
     <h1>CATALOGUE-PRODUIT</h1>
