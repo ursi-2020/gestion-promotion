@@ -14,7 +14,7 @@ import json
 
 # for Crm App
 # Display all tickets
-def indexcrm(request):
+def indextickets(request):
     data = Tickets.objects.all()
     d = { 
             "list_tickets": data
@@ -24,7 +24,7 @@ def indexcrm(request):
 # load all tickets from crm
 def loadtickets(request):
     if request.method == 'POST' or request.method == 'GET':
-        tickets = api.send_request('crm', 'api/get-tickets/')
+        tickets = api.send_request('crm', 'api/get-tickets')
         
         result_expected = serializers.serialize("json", Tickets.objects.all())
         prod, promo = json.dumps(tickets, sort_keys=True), json.dumps(result_expected, sort_keys=True)

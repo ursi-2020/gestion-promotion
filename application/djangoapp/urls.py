@@ -1,7 +1,7 @@
 from django.urls import path
 
 from application.djangoapp.views import customers as c
-from application.djangoapp.views import tickets as t
+from application.djangoapp.views import tickets as tk
 from application.djangoapp.views.promotions import ecommerce as e
 from application.djangoapp.views.promotions import magasin as m
 from application.djangoapp.views.promotions import customers as pc
@@ -54,8 +54,8 @@ urlpatterns = [
     # Requests in front page to crm
     path('admin/crm/indexcrm', c.indexcrm, name='indexcrm'),
     path('admin/crm/loadcrm', c.loadcrm, name='loadcrm'),
-    path('admin/crm/indextickets', t.indextickets, name='indextickets'),
-    path('admin/crm/loadtickets', t.loadtickets, name='loadtickets'),
+    path('admin/crm/indextickets', tk.indextickets, name='indextickets'),
+    path('admin/crm/loadtickets', tk.loadtickets, name='loadtickets'),
     
 
     # Requests in front page to catalogue produit
