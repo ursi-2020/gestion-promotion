@@ -12,6 +12,8 @@ The gestion-promotion home page contains following elements :
 - Tables registering all promotions
     - one for ecommerce promotions
     - one for magasin promotions
+    - one for targeted clients
+    - one for targeted products of clients
 - A table registering all clients given by CRM
 - Tables registering all products given by catalogue-produit
     - one for all products
@@ -38,7 +40,7 @@ The price "prix" given in the json, is the price with the promotion already appl
 
 ```json
 {
-  "produits": [
+  "promo": [
     {
       "id": 3291,
       "codeProduit": "X1-1",
@@ -85,7 +87,7 @@ The price "prix" given in the json, is the price with the promotion already appl
 
 ```json
 {
-  "produits": [
+  "promo": [
     {
       "id": 3291,
       "codeProduit": "X1-1",
@@ -115,7 +117,7 @@ The price "prix" given in the json, is the price with the promotion already appl
 
 ## Get all user targeted promotions
 
-Get all magasins promotions
+Get all targeted promotions for cients
 
 **Service name** : `gestion-promotion`
 
@@ -132,36 +134,76 @@ The reduction is the one to applied for the shopphing cart in percent. All the o
 **Content examples:**
 
 ```json
-[
-  {
-    "IdClient": "a14e39ce-e29e-11e9-a8cb-08002751d198",
-    "Nom": "Jacquie",
-    "Prenom": "Bloggs",
-    "Credit": "42,00",
-    "Paiement": 0,
-    "NbRefus": 5,
-    "Arembourser": 0,
-    "Compte": "BKN1CST53",
-    "Age": 29,
-    "Sexe": "F",
-    "Email": "bibalou@wanadoo.fr",
-    "carteFid": 33,
-    "reduction": 5
-  },
-  {
-    "IdClient": "a14f4a08-e29e-11e9-a8cb-08002751d198",
-    "Nom": "Michelle",
-    "Prenom": "Bigoudi",
-    "Credit": "69,00",
-    "Paiement": 3,
-    "NbRefus": 5,
-    "Arembourser": 0,
-    "Compte": "",
-    "Age": 54,
-    "Sexe": "H",
-    "Email": "lalaland@gmail.com",
-    "carteFid": 42,
-    "reduction": 20
-  }
-]
+{
+  "promo": [
+        {
+          "IdClient": "a14e39ce-e29e-11e9-a8cb-08002751d198",
+          "Nom": "Jacquie",
+          "Prenom": "Bloggs",
+          "Credit": "42,00",
+          "Paiement": 0,
+          "NbRefus": 5,
+          "Arembourser": 0,
+          "Compte": "BKN1CST53",
+          "Age": 29,
+          "Sexe": "F",
+          "Email": "bibalou@wanadoo.fr",
+          "carteFid": 33,
+          "reduction": 5
+        },
+        {
+          "IdClient": "a14f4a08-e29e-11e9-a8cb-08002751d198",
+          "Nom": "Michelle",
+          "Prenom": "Bigoudi",
+          "Credit": "69,00",
+          "Paiement": 3,
+          "NbRefus": 5,
+          "Arembourser": 0,
+          "Compte": "",
+          "Age": 54,
+          "Sexe": "H",
+          "Email": "lalaland@gmail.com",
+          "carteFid": 42,
+          "reduction": 20
+        }
+  ]
+}
 ```
+
+## Get all user targeted promotions
+
+Get all targeted products promotions for clients
+
+**Service name** : `gestion-promotion`
+
+**URL** : `promo/customersproducts`
+
+**Method** : `GET`
+
+**Auth required** : NO
+
+**Success Response code:** `200 OK`
+
+The reduction is the one to applied for the shopphing cart in percent. All the other fields are provided by CRM.
+
+**Content examples:**
+
+```json
+{
+  "promo": [
+      {
+        "IdClient": "a14e39ce-e29e-11e9-a8cb-08002751d198",
+        "codeProduit": "X1-0",
+        "quantity": 2,
+        "reduction": 5
+      },
+      {
+        "IdClient": "a14f4a08-e29e-11e9-a8cb-08002751d198",
+        "codeProduit": "X1-0",
+        "quantity": 1,
+        "reduction": 20
+      }
+  ]
+}
+```
+
