@@ -11,7 +11,7 @@ from django.views.decorators.csrf import csrf_exempt
 # Promotions - Index
 # Display a listing of the resource.
 def index(request): 
-    promo = Promotions.objects.all()
+    promo = Promotions.objects.values()
     json = list(promo)
     return JsonResponse({"promo" : json})
 

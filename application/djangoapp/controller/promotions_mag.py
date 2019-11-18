@@ -10,6 +10,6 @@ from django.views.decorators.csrf import csrf_exempt
 # PromotionsMag - Index
 # Display a listing of the resource.
 def index(request): 
-    promo = PromotionsMag.objects.all()
+    promo = PromotionsMag.objects.values()
     json = list(promo)
     return JsonResponse({"promo" : json})
