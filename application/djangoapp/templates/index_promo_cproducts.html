@@ -2,17 +2,19 @@
 <div style="margin: 20px;">
     <table class="table table-bordered table-dark table-hover">
         <tr>
-            <th>id</th>
-            <th>IdClient</th>
             <th>date</th>
+            <th>IdClient</th>
+            <th>codeProduit</th>
+            <th>quantity</th>
             <th>reduction</th>
         </tr>
     {% for c in list_promotions %}
     <tr>
-        <th>{{ c.id }}</th> 
-        <th>{{ c.IdClient }}</th> 
-        <th>{{ c.date }}</th> 
-        <th>{{ c.reduction }}</th> 
+        <th>{{c.date }}</th>
+        <th>{{ c.IdClient }}</th>
+        <th>{{ c.codeProduit }}</th>
+        <th>{{ c.quantity }}</th>
+        <th>{{ c.reduction }}</th>
     </tr>
     {% endfor %}
     </table>

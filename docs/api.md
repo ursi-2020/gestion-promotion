@@ -130,7 +130,7 @@ Get all targeted promotions for cients
 **Success Response code:** `200 OK`
 
 The reduction is the one to applied for the shopphing cart in percent. All the other fields are provided by CRM.
-
+'date' represents the date when the promotion was created.
 **Content examples:**
 
 ```json
@@ -138,32 +138,12 @@ The reduction is the one to applied for the shopphing cart in percent. All the o
   "promo": [
         {
           "IdClient": "a14e39ce-e29e-11e9-a8cb-08002751d198",
-          "Nom": "Jacquie",
-          "Prenom": "Bloggs",
-          "Credit": "42,00",
-          "Paiement": 0,
-          "NbRefus": 5,
-          "Arembourser": 0,
-          "Compte": "BKN1CST53",
-          "Age": 29,
-          "Sexe": "F",
-          "Email": "bibalou@wanadoo.fr",
-          "carteFid": 33,
+          "date": "2019-10-09T18:03:45.408701Z",
           "reduction": 5
         },
         {
           "IdClient": "a14f4a08-e29e-11e9-a8cb-08002751d198",
-          "Nom": "Michelle",
-          "Prenom": "Bigoudi",
-          "Credit": "69,00",
-          "Paiement": 3,
-          "NbRefus": 5,
-          "Arembourser": 0,
-          "Compte": "",
-          "Age": 54,
-          "Sexe": "H",
-          "Email": "lalaland@gmail.com",
-          "carteFid": 42,
+          "date": "2019-10-09T18:03:45.408701Z",
           "reduction": 20
         }
   ]
@@ -184,20 +164,22 @@ Get all targeted products promotions for clients
 
 **Success Response code:** `200 OK`
 
-The reduction is the one to applied for the shopphing cart in percent. All the other fields are provided by CRM.
-
+The reduction is the one to applied for the specified product for a specified client in percent. All the other fields are provided by CRM.
+'date' represents the date when the promotion was created.
 **Content examples:**
 
 ```json
 {
   "promo": [
       {
+        "date": "2019-10-09T18:03:45.408701Z",
         "IdClient": "a14e39ce-e29e-11e9-a8cb-08002751d198",
         "codeProduit": "X1-0",
         "quantity": 2,
         "reduction": 5
       },
       {
+        "date": "2019-10-09T18:03:45.408701Z",
         "IdClient": "a14f4a08-e29e-11e9-a8cb-08002751d198",
         "codeProduit": "X1-0",
         "quantity": 1,

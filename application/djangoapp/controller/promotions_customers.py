@@ -10,6 +10,9 @@ from django.views.decorators.csrf import csrf_exempt
 # PromotionsCustomers - Index
 # Display a listing of the resource.
 def index(request):
-    promo = PromotionsCustomers.objects.values()
+    clock_time = api.send_request('scheduler', 'clock/time')
+    time = datetime.strptime(clock_time, '"%d/%m/%Y-%H:%M:%S"')
+    time = time - timedelta(weeks=1)
+    promo = PromotionsCustomers.objects.filter(date__gte = time).values()
     json = list(promo)
     return JsonResponse({"promo" : json})

@@ -14,7 +14,7 @@ def clear(request):
     PromotionsMag.objects.all().delete()
     PromotionsEco.objects.all().delete()
     PromotionsCustomers.objects.all().delete()
-    PromotionsCustomersProducts.objects.all.delete()
+    PromotionsCustomersProducts.objects.all().delete()
 
     ProductsMag.objects.all().delete()
     ProductsEco.objects.all().delete()  

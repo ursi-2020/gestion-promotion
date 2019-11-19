@@ -12,6 +12,7 @@ from django.core import serializers
 
 from application.djangoapp.models import *
 from django.views.decorators.csrf import csrf_exempt
+from datetime import datetime, timedelta
 
 from application.djangoapp.controller import promotions_cproducts as cproducts
 
@@ -21,7 +22,7 @@ def indexpromocustomersproducts(request):
     d = { 
             "list_promotions": data
         }
-    return render(request, 'index_promo_customers.html', d)
+    return render(request, 'index_promo_cproducts.html', d)
 
 # Dispatcher of targeted promotions customers resources
 @csrf_exempt
@@ -32,27 +33,31 @@ def promoCustomersProducts(request):
 
 
 # Compute targeted client Promotions
+@csrf_exempt
 def calcPromoCustomersProducts(request):
-    PromotionsCustomersProducts.objects.all().delete()
-    tickets = Tickets.objects.all()
-    for t in tickets:
-        for pt in t['articles']:
-            if PromotionsCustomersProducts.objects.filter(IdClient = t.client, codeProduit = pt.codeProduit).count() == 0:
-                new_promo = PromotionsCustomersProducts(IdClient = t.client, codeProduit = pt.codeProduit, quantity = pt.quantity)
+    clock_time = api.send_request('scheduler', 'clock/time')
+    time = datetime.strptime(clock_time, '"%d/%m/%Y-%H:%M:%S"')
+    time = time - timedelta(weeks=1)
+    for t in Tickets.objects.all():
+        for pt in t.articles.all():
+            if PromotionsCustomersProducts.objects.filter(IdClient = t.client, codeProduit = pt.codeProduit, date__gte = time).count() == 0:
+                new_promo = PromotionsCustomersProducts(date = time, IdClient = t.client, codeProduit = pt.codeProduit, quantity = pt.quantity)
+                new_promo.save()
             else:
-                promo = PromotionsCustomersProducts.get(IdClient = t.client, codeProduit = pt.codeProduit)
-                promo.quantity += pt.quantity
-                promo.save()
-    
-    little_promo = PromotionsCustomersProducts.objects.filter(quantity__gte = 3).exclude(quantity__lte = 4)
-    big_promo = PromotionsCustomers.objects.filter(quantity__gte = 5)
+                if PromotionsCustomersProducts.objects.all().count() > 0:
+                    promo = PromotionsCustomersProducts.objects.get(IdClient = t.client, codeProduit = pt.codeProduit, date__gte = time)
+                    promo.quantity += pt.quantity
+                    promo.save()
+    if PromotionsCustomersProducts.objects.all().count() > 0:
+        little_promo = PromotionsCustomersProducts.objects.filter(quantity__gte = 3, date__gte = time).exclude(quantity__gt = 4)
+        big_promo = PromotionsCustomersProducts.objects.filter(quantity__gte = 5, date__gte = time)
 
-    for lp in little_promo:
-        lp.reduction = 10
-        lp.save()
+        for lp in little_promo:
+            lp.reduction = 10
+            lp.save()
 
-    for bp in big_promo:
-        bp.reduction = 25
-        bp.save()
+        for bp in big_promo:
+            bp.reduction = 25
+            bp.save()
 
     return render(request, 'home.html')

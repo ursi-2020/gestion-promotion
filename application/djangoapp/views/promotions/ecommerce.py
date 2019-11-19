@@ -32,6 +32,7 @@ def promoEco(request):
     return HttpResponse("The request has been failed")
 
 # Compute Ecommerce Promotions
+@csrf_exempt
 def calcPromoEco(request):
     PromotionsEco.objects.all().delete()
     count = ProductsEco.objects.count()

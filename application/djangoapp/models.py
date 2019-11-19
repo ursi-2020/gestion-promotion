@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime, timedelta
 
 class Article(models.Model):
     nom = models.CharField(max_length=200)
@@ -41,22 +42,13 @@ class PromotionsMag(models.Model):
     reduction = models.PositiveIntegerField(default=0)
 
 # contains all promotions targeted to customers
-class PromotionsCustomers(models.Model):
+class PromotionsCustomers(models.Model):    
     IdClient = models.TextField(blank=False)
-    Nom = models.CharField(max_length=200)
-    Prenom = models.CharField(max_length=200)
-    Credit = models.IntegerField(default=0)
-    Paiement = models.IntegerField(default=0)
-    NbRefus = models.IntegerField(default=0)
-    Arembourser = models.IntegerField(default=0)
-    Compte = models.CharField(max_length=10, default="")
-    Age = models.IntegerField(default=-1)
-    Sexe = models.CharField(max_length=5, default="")
-    Email = models.CharField(max_length=200, default="")
-    carteFid = models.IntegerField(default=-1)
+    date = models.DateField()
     reduction = models.IntegerField(default=0)
 
 class PromotionsCustomersProducts(models.Model):
+    date = models.DateField()
     IdClient = models.TextField(blank=False)
     codeProduit = models.CharField(max_length=20)
     quantity = models.IntegerField(default = 0)
@@ -72,14 +64,9 @@ class Customers(models.Model):
     Nom = models.CharField(max_length=200)
     Prenom = models.CharField(max_length=200)
     Credit = models.IntegerField(default=0)
-    Paiement = models.IntegerField(default=0)
-    NbRefus = models.IntegerField(default=0)
-    Arembourser = models.IntegerField(default=0)
+    Paiement = models.IntegerField()
     Compte = models.CharField(max_length=10, default="")
-    Age = models.IntegerField(default=-1)
-    Sexe = models.CharField(max_length=5, default="")
-    Email = models.CharField(max_length=200, default="")
-    carteFid = models.IntegerField(default=-1)
+    carteFid = models.IntegerField()
 
 # contains all articles in tickets.articles from crm
 class ArticlesList(models.Model):
@@ -94,7 +81,6 @@ class Tickets(models.Model):
     articles = models.ManyToManyField(ArticlesList)
     pointsFidelite = models.IntegerField()
     modePaiement = models.CharField(max_length=10)
-    transmis = models.BooleanField()
 
 # # From catalogue-produit
 

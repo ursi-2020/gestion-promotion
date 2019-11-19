@@ -9,10 +9,12 @@ from application.djangoapp.models import *
 
 from django.shortcuts import redirect
 from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
 
 
 
 # Refreshes the two databases Products and Customers in posting to CRM and catalogue-produit to refresh all datas
+@csrf_exempt
 def refresh(request):
     clock_time = api.send_request('scheduler', 'clock/time')
     time = datetime.strptime(clock_time, '"%d/%m/%Y-%H:%M:%S"')
@@ -36,7 +38,7 @@ def refresh(request):
     api.schedule_task("gestion-promotion", "promo/customers/calc", time, "day", {}, "gestion-promotion", "Promo: customers promo")
     
     # Refreshes Promotions for targeted customers products everydays
-    api.schedule_task("gestion-promotion", "promo/customersproducts/calc", time, "day", {}, "gestion-promotion", "Promo: customers products promo")
+    api.schedule_task("gestion-promotion", "promo/customersproducts/calc", time, "week", {}, "gestion-promotion", "Promo: customers products promo")
     
 
     return render(request, 'home.html')
