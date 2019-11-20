@@ -26,7 +26,7 @@ def refresh(request):
     api.schedule_task("gestion-promotion", "admin/product/loadproduct", time, "day", {}, "gestion-promotion", "Promo: Update product")
 
     # Refreshes Tickets everydays
-    api.schedule_task("gestion-promotion", "admin/tickets/loadtickets", time, "day", {}, "gestion-promotion", "Promo: Update tickets")
+    api.schedule_task("gestion-promotion", "admin/crm/loadtickets", time, "day", {}, "gestion-promotion", "Promo: Update tickets")
 
     # Refreshes Promotions for Ecommerce everydays
     api.schedule_task("gestion-promotion", "promo/ecommerce/calc", time, "day", {}, "gestion-promotion", "Promo: ecommerce promo")

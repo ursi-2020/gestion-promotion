@@ -45,25 +45,23 @@ def calcPromoCustomers(request):
         tk = Tickets.objects.filter(client = t.client, date__gte = time).count()
         if loop == 1:
             if tk > 10 and PromotionsCustomers.objects.filter(IdClient = t.client, date__gte = time).count() == 0:
-                new_promo = PromotionsCustomers(IdClient = t.client, date = time, reduction = 50)
+                new_promo = PromotionsCustomers(IdClient = t.client, date = time, reduction = 9)
                 new_promo.save()
             elif tk > 5 and PromotionsCustomers.objects.filter(IdClient = t.client, date__gte = time).count() == 0:
-                new_promo = PromotionsCustomers(IdClient = t.client, date = time, reduction = 25)
+                new_promo = PromotionsCustomers(IdClient = t.client, date = time, reduction = 7)
                 new_promo.save()
             elif  tk > 1 and PromotionsCustomers.objects.filter(IdClient = t.client, date__gte = time).count() == 0:
-                print("lolo")
-                new_promo = PromotionsCustomers(IdClient = t.client, date = time, reduction = 15)
+                new_promo = PromotionsCustomers(IdClient = t.client, date = time, reduction = 5)
                 new_promo.save()
         else:
             if tk > 10 and PromotionsCustomers.objects.filter(IdClient = t.client, date__gte = time).count() == 0:
-                new_promo = PromotionsCustomers(IdClient = t.client, date = time, reduction = 50)
+                new_promo = PromotionsCustomers(IdClient = t.client, date = time, reduction = 9)
                 new_promo.save()
             elif tk > 5 and PromotionsCustomers.objects.filter(IdClient = t.client, date__gte = time).count() == 0:
-                new_promo = PromotionsCustomers(IdClient = t.client, date = time, reduction = 25)
+                new_promo = PromotionsCustomers(IdClient = t.client, date = time, reduction = 7)
                 new_promo.save()
             elif  tk > 1 and PromotionsCustomers.objects.filter(IdClient = t.client, date__gte = time).count() == 0:
-                print("lala")
-                new_promo = PromotionsCustomers(IdClient = t.client, date = time, reduction = 15)
+                new_promo = PromotionsCustomers(IdClient = t.client, date = time, reduction = 5)
                 new_promo.save()
         loop += 1
 

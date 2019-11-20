@@ -32,6 +32,7 @@ def promoMag(request):
     return HttpResponse("The request has been failed")
 
 # Compute Magasin Promotions
+@csrf_exempt
 def calcPromoMag(request):
     PromotionsMag.objects.all().delete()
     count = ProductsMag.objects.count()
