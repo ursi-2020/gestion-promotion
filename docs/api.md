@@ -51,6 +51,7 @@ The price "prix" given in the json, is the price with the promotion already appl
       "prix": 225,
       "prixOriginel": 250,
       "reduction": 10,
+      "date": "2019-10-09T18:03:45.408701Z",
     },
     {
       "id": 3290,
@@ -62,6 +63,7 @@ The price "prix" given in the json, is the price with the promotion already appl
       "prix": 230,
       "prixOriginel": 250,
       "reduction": 8,
+      "date": "2019-10-09T18:03:45.408701Z",
     },
   ]
 }
@@ -98,6 +100,7 @@ The price "prix" given in the json, is the price with the promotion already appl
       "prix": 225,
       "prixOriginel": 250,
       "reduction": 10,
+      "date": "2019-10-09T18:03:45.408701Z",
     },
     {
       "id": 3290,
@@ -109,6 +112,7 @@ The price "prix" given in the json, is the price with the promotion already appl
       "prix": 230,
       "prixOriginel": 250,
       "reduction": 8,
+      "date": "2019-10-09T18:03:45.408701Z",
     },
   ]
 }
@@ -131,6 +135,7 @@ Get all targeted promotions for cients
 
 The reduction is the one to applied for the shopphing cart in percent. All the other fields are provided by CRM.
 'date' represents the date when the promotion was created.
+
 **Content examples:**
 
 ```json

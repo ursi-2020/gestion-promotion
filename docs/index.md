@@ -2,7 +2,10 @@
 
 # Sections
 
+*[HOME PAGE DESCRIPTION](fonctions.md)*
+
 *[API](api.md)*
+
 *[SCHEDULING](schedule.md)*
 
 # Rôle de l'application
