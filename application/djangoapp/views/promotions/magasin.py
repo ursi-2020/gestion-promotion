@@ -43,6 +43,10 @@ def calcPromoMag(request):
     
     promo = randint(5, 15)
     price = eco_random.prix - eco_random.prix * (promo / 100)
+    if (eco_random.prixFournisseur > price):
+        price = eco_random.prixFournisseur + 1
+        promo = price * 100 / eco_random.prix
+        promo = 100 - promo
     p = PromotionsMag(codeProduit = eco_random.codeProduit, familleProduit = eco_random.familleProduit,
                         descriptionProduit = eco_random.descriptionProduit, quantiteMin = eco_random.quantiteMin,
                         packaging = eco_random.packaging, prix = price, prixOriginel = eco_random.prix, reduction = promo, date = time)
@@ -54,6 +58,10 @@ def calcPromoMag(request):
     
     promo = randint(5, 15)
     price = eco_random_2.prix - eco_random_2.prix * (promo / 100)
+    if (eco_random_2.prixFournisseur > price):
+        price = eco_random_2.prixFournisseur + 1
+        promo = price * 100 / eco_random.prix
+        promo = 100 - promo
     p = PromotionsMag(codeProduit = eco_random_2.codeProduit, familleProduit = eco_random_2.familleProduit,
                         descriptionProduit = eco_random_2.descriptionProduit, quantiteMin = eco_random_2.quantiteMin,
                         packaging = eco_random_2.packaging, prix = price, prixOriginel = eco_random_2.prix, reduction = promo, date = time)
