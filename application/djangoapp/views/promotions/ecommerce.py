@@ -34,7 +34,10 @@ def promoEco(request):
 # Compute Ecommerce Promotions
 @csrf_exempt
 def calcPromoEco(request):
-    PromotionsEco.objects.all().delete()
+    # PromotionsEco.objects.all().delete()
+    clock_time = api.send_request('scheduler', 'clock/time')
+    time = datetime.strptime(clock_time, '"%d/%m/%Y-%H:%M:%S"')
+
     count = ProductsEco.objects.count()
     eco_random = ProductsEco.objects.all()[randint(0, count - 1)]
     
@@ -42,7 +45,7 @@ def calcPromoEco(request):
     price = eco_random.prix - eco_random.prix * (promo / 100)
     p = PromotionsEco(codeProduit = eco_random.codeProduit, familleProduit = eco_random.familleProduit,
                         descriptionProduit = eco_random.descriptionProduit, quantiteMin = eco_random.quantiteMin,
-                        packaging = eco_random.packaging, prix = price, prixOriginel = eco_random.prix, reduction = promo)
+                        packaging = eco_random.packaging, prix = price, prixOriginel = eco_random.prix, reduction = promo, date = time)
     p.save()
     
     eco_random_2 = ProductsEco.objects.all()[randint(0, count - 1)]
@@ -53,7 +56,7 @@ def calcPromoEco(request):
     price = eco_random_2.prix - eco_random_2.prix * (promo / 100)
     p = PromotionsEco(codeProduit = eco_random_2.codeProduit, familleProduit = eco_random_2.familleProduit,
                         descriptionProduit = eco_random_2.descriptionProduit, quantiteMin = eco_random_2.quantiteMin,
-                        packaging = eco_random_2.packaging, prix = price, prixOriginel = eco_random_2.prix, reduction = promo)
+                        packaging = eco_random_2.packaging, prix = price, prixOriginel = eco_random_2.prix, reduction = promo, date = time)
     p.save()
     
     return render(request, 'home.html')

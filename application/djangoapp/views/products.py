@@ -52,7 +52,7 @@ def loadproduct(request):
             print(str(products))
             p = json.loads(products)
             for c in p['produits']:
-                record = Products(id = c['id'], codeProduit = c['codeProduit'], familleProduit = c['familleProduit'], descriptionProduit = c['descriptionProduit'], quantiteMin = c['quantiteMin'], packaging = c['packaging'], prix = c['prix'], exclusivite = c['exclusivite'])
+                record = Products(id = c['id'], codeProduit = c['codeProduit'], familleProduit = c['familleProduit'], descriptionProduit = c['descriptionProduit'], quantiteMin = c['quantiteMin'], packaging = c['packaging'], prixFournisseur = c['prixFournisseur'], prix = c['prix'], exclusivite = c['exclusivite'])
                 record.save()
 
     if request.method == 'POST' or request.method == 'GET':
@@ -65,7 +65,7 @@ def loadproduct(request):
             ProductsEco.objects.all().delete()
             p = json.loads(products)
             for c in p['produits']:
-                record = ProductsEco(id = c['id'], codeProduit = c['codeProduit'], familleProduit = c['familleProduit'], descriptionProduit = c['descriptionProduit'], quantiteMin = c['quantiteMin'], packaging = c['packaging'], prix = c['prix'])
+                record = ProductsEco(id = c['id'], codeProduit = c['codeProduit'], familleProduit = c['familleProduit'], descriptionProduit = c['descriptionProduit'], quantiteMin = c['quantiteMin'], packaging = c['packaging'], prixFournisseur = c['prixFournisseur'], prix = c['prix'])
                 record.save()
 
     if request.method == 'POST' or request.method == 'GET':
@@ -78,6 +78,6 @@ def loadproduct(request):
             ProductsMag.objects.all().delete()
             p = json.loads(products)
             for c in p['produits']:
-                record = ProductsMag(id = c['id'], codeProduit = c['codeProduit'], familleProduit = c['familleProduit'], descriptionProduit = c['descriptionProduit'], quantiteMin = c['quantiteMin'], packaging = c['packaging'], prix = c['prix'])
+                record = ProductsMag(id = c['id'], codeProduit = c['codeProduit'], familleProduit = c['familleProduit'], descriptionProduit = c['descriptionProduit'], quantiteMin = c['quantiteMin'], packaging = c['packaging'], prixFournisseur = c['prixFournisseur'], prix = c['prix'])
                 record.save()
     return render(request, 'home.html')

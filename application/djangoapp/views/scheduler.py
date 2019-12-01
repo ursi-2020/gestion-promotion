@@ -35,7 +35,7 @@ def refresh(request):
     api.schedule_task("gestion-promotion", "promo/magasin/calc", time, "day", {}, "gestion-promotion", "Promo: magasin promo")
     
     # Refreshes Promotions for targeted customers everydays
-    api.schedule_task("gestion-promotion", "promo/customers/calc", time, "day", {}, "gestion-promotion", "Promo: customers promo")
+    api.schedule_task("gestion-promotion", "promo/customers/calc", time, "week", {}, "gestion-promotion", "Promo: customers promo")
     
     # Refreshes Promotions for targeted customers products everydays
     api.schedule_task("gestion-promotion", "promo/customersproducts/calc", time, "week", {}, "gestion-promotion", "Promo: customers products promo")

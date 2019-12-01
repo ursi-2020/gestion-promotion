@@ -41,7 +41,7 @@ def calcPromoCustomersProducts(request):
     for t in Tickets.objects.all():
         for pt in t.articles.all():
             if PromotionsCustomersProducts.objects.filter(IdClient = t.client, codeProduit = pt.codeProduit, date__gte = time).count() == 0:
-                new_promo = PromotionsCustomersProducts(date = time, IdClient = t.client, codeProduit = pt.codeProduit, quantity = pt.quantity)
+                new_promo = PromotionsCustomersProducts(date = time + timedelta(weeks=1), IdClient = t.client, codeProduit = pt.codeProduit, quantity = pt.quantity)
                 new_promo.save()
             else:
                 if PromotionsCustomersProducts.objects.all().count() > 0:

@@ -40,29 +40,16 @@ def calcPromoCustomers(request):
     clock_time = api.send_request('scheduler', 'clock/time')
     time = datetime.strptime(clock_time, '"%d/%m/%Y-%H:%M:%S"')
     time = time - timedelta(weeks=1)
-    loop = 1
     for t in Tickets.objects.all():
         tk = Tickets.objects.filter(client = t.client, date__gte = time).count()
-        if loop == 1:
-            if tk > 10 and PromotionsCustomers.objects.filter(IdClient = t.client, date__gte = time).count() == 0:
-                new_promo = PromotionsCustomers(IdClient = t.client, date = time, reduction = 9)
-                new_promo.save()
-            elif tk > 5 and PromotionsCustomers.objects.filter(IdClient = t.client, date__gte = time).count() == 0:
-                new_promo = PromotionsCustomers(IdClient = t.client, date = time, reduction = 7)
-                new_promo.save()
-            elif  tk > 1 and PromotionsCustomers.objects.filter(IdClient = t.client, date__gte = time).count() == 0:
-                new_promo = PromotionsCustomers(IdClient = t.client, date = time, reduction = 5)
-                new_promo.save()
-        else:
-            if tk > 10 and PromotionsCustomers.objects.filter(IdClient = t.client, date__gte = time).count() == 0:
-                new_promo = PromotionsCustomers(IdClient = t.client, date = time, reduction = 9)
-                new_promo.save()
-            elif tk > 5 and PromotionsCustomers.objects.filter(IdClient = t.client, date__gte = time).count() == 0:
-                new_promo = PromotionsCustomers(IdClient = t.client, date = time, reduction = 7)
-                new_promo.save()
-            elif  tk > 1 and PromotionsCustomers.objects.filter(IdClient = t.client, date__gte = time).count() == 0:
-                new_promo = PromotionsCustomers(IdClient = t.client, date = time, reduction = 5)
-                new_promo.save()
-        loop += 1
+        if tk > 10 and PromotionsCustomers.objects.filter(IdClient = t.client, date__gte = time).count() == 0:
+            new_promo = PromotionsCustomers(IdClient = t.client, date = time + timedelta(weeks=1), reduction = 9)
+            new_promo.save()
+        elif tk > 5 and PromotionsCustomers.objects.filter(IdClient = t.client, date__gte = time).count() == 0:
+            new_promo = PromotionsCustomers(IdClient = t.client, date = time + timedelta(weeks=1), reduction = 7)
+            new_promo.save()
+        elif  tk > 3 and PromotionsCustomers.objects.filter(IdClient = t.client, date__gte = time).count() == 0:
+            new_promo = PromotionsCustomers(IdClient = t.client, date = time + timedelta(weeks=1), reduction = 5)
+            new_promo.save()
 
     return render(request, 'home.html')

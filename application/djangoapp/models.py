@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import datetime, timedelta
+import django
 
 class Article(models.Model):
     nom = models.CharField(max_length=200)
@@ -29,6 +30,7 @@ class PromotionsEco(models.Model):
     prix = models.PositiveIntegerField()
     prixOriginel = models.PositiveIntegerField(default=0)
     reduction = models.PositiveIntegerField(default=0)
+    date = models.DateField()
 
 # contains all promotions for magasin
 class PromotionsMag(models.Model):
@@ -40,6 +42,7 @@ class PromotionsMag(models.Model):
     prix = models.PositiveIntegerField()
     prixOriginel = models.PositiveIntegerField(default=0)
     reduction = models.PositiveIntegerField(default=0)
+    date = models.DateField()
 
 # contains all promotions targeted to customers
 class PromotionsCustomers(models.Model):    
@@ -92,6 +95,7 @@ class Products(models.Model):
     quantiteMin = models.PositiveIntegerField()
     packaging = models.PositiveIntegerField()
     prix = models.PositiveIntegerField()
+    prixFournisseur = models.PositiveIntegerField()
     exclusivite = models.CharField(max_length=200, default="")
     
 # contains all ecommerce products from catalogue-produit
@@ -101,6 +105,7 @@ class ProductsEco(models.Model):
     descriptionProduit = models.CharField(max_length=200)
     quantiteMin = models.PositiveIntegerField()
     packaging = models.PositiveIntegerField()
+    prixFournisseur = models.PositiveIntegerField()
     prix = models.PositiveIntegerField()
 
 
@@ -111,5 +116,6 @@ class ProductsMag(models.Model):
     descriptionProduit = models.CharField(max_length=200)
     quantiteMin = models.PositiveIntegerField()
     packaging = models.PositiveIntegerField()
+    prixFournisseur = models.PositiveIntegerField()
     prix = models.PositiveIntegerField()
 

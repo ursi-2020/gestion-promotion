@@ -12,6 +12,6 @@ def index(request):
     clock_time = api.send_request('scheduler', 'clock/time')
     time = datetime.strptime(clock_time, '"%d/%m/%Y-%H:%M:%S"')
     time = time - timedelta(weeks=1)
-    promo = PromotionsCustomersProducts.objects.filter(date__gte = time).values()
+    promo = PromotionsCustomersProducts.objects.filter(date__gt = time).values()
     json = list(promo)
     return JsonResponse({"promo" : json})
