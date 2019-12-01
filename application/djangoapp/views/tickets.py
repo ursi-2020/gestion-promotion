@@ -19,6 +19,8 @@ def indextickets(request):
     d = { 
             "list_tickets": data
         }
+    print(d)
+    print(data[0])
     return render(request, 'index_tickets.html', d)
 
 # load all tickets from crm

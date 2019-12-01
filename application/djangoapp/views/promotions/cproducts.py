@@ -45,16 +45,19 @@ def calcPromoCustomersProducts(request):
                 new_promo.save()
             else:
                 if PromotionsCustomersProducts.objects.all().count() > 0:
-                    promo = PromotionsCustomersProducts.objects.get(IdClient = t.client, codeProduit = pt.codeProduit, date__gte = time + timedelta(weeks=1))
-                    promo.quantity += pt.quantity
-                    promo.save()
+                    try:
+                        promo = PromotionsCustomersProducts.objects.get(IdClient = t.client, codeProduit = pt.codeProduit, date__gte = time + timedelta(weeks=1))
+                        promo.quantity += pt.quantity
+                        promo.save()
+                    except PromotionsCustomersProducts.DoesNotExist:
+                        promo = None
     if PromotionsCustomersProducts.objects.all().count() > 0:
         little_promo = PromotionsCustomersProducts.objects.filter(quantity__gte = 3, date__gte = time + timedelta(weeks=1)).exclude(quantity__gt = 4)
         big_promo = PromotionsCustomersProducts.objects.filter(quantity__gte = 5, date__gte = time + timedelta(weeks=1))
 
         for lp in little_promo:
             lp.reduction = 10
-            product = Products.objects.filter(codeProduit = lp.codeProduit)
+            product = Products.objects.get(codeProduit = lp.codeProduit)
             if (product.prixFournisseur > product.prix - product.prix * lp.reduction / 100):
                 price = product.prixFournisseur + 1
                 lp.reduction = price * 100 / product.prix
@@ -63,7 +66,8 @@ def calcPromoCustomersProducts(request):
 
         for bp in big_promo:
             bp.reduction = 25
-            if (product.prixFournisseur > product.prix - product.prix * lp.reduction / 100):
+            product = Products.objects.get(codeProduit = bp.codeProduit)
+            if (product.prixFournisseur > product.prix - product.prix * bp.reduction / 100):
                 price = product.prixFournisseur + 1
                 bp.reduction = price * 100 / product.prix
                 bp.reduction = 100 - bp.reduction

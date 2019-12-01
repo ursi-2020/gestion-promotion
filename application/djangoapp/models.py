@@ -66,10 +66,6 @@ class Customers(models.Model):
     IdClient = models.TextField(blank=False)
     Nom = models.CharField(max_length=200)
     Prenom = models.CharField(max_length=200)
-    Credit = models.IntegerField(default=0)
-    Paiement = models.IntegerField()
-    Compte = models.CharField(max_length=10, default="")
-    carteFid = models.IntegerField()
 
 # contains all articles in tickets.articles from crm
 class ArticlesList(models.Model):

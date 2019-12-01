@@ -6,10 +6,6 @@
             <th>IdClient</th>
             <th>Nom</th>
             <th>Prenom</th>
-            <th>Credit</th>
-            <th>Paiement</th>
-            <th>Compte</th>
-            <th>carteFid</th>
         </tr>
     {% for c in list_customers %}
     <tr>
@@ -17,10 +13,6 @@
         <th>{{ c.IdClient }}</th> 
         <th>{{ c.Nom }}</th> 
         <th>{{ c.Prenom }}</th> 
-        <th>{{ c.Credit }}</th> 
-        <th>{{ c.Paiement }}</th> 
-        <th>{{ c.Compte }}</th> 
-        <th>{{ c.carteFid }}</th>
     </tr>
     {% endfor %}
     </table>

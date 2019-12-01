@@ -12,6 +12,7 @@
             <th>prix</th>
             <th>prixOriginel</th>
             <th>reduction</th>
+            <th>date</th>
         </tr>
     {% for c in list_products %}
     <tr>
@@ -24,6 +25,7 @@
         <th>{{ c.prix|div:100 }}</th> 
         <th>{{ c.prixOriginel|div:100 }}</th> 
         <th>{{ c.reduction }}</th>
+        <th>{{ c.date }}</th>
     </tr>
     {% endfor %}
     </table>

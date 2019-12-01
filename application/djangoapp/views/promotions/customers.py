@@ -18,11 +18,9 @@ from application.djangoapp.controller import promotions_customers as customers
 # Display all target promotions for customers
 def indexpromocustomers(request):
     data = PromotionsCustomers.objects.all()
-    print(data[0].reduction)
     d = { 
             "list_promotions": data
         }
-    print("lol")
     return render(request, 'index_promo_customers.html', d)
 
 # Dispatcher of targeted promotions customers resources
