@@ -4,6 +4,8 @@ from django.http import HttpResponse
 from django.forms.models import modelform_factory
 import json
 
+from django.http import JsonResponse
+from apipkg import api_manager as api
 
 from django.views.decorators.csrf import csrf_exempt
 
