@@ -19,26 +19,24 @@ def indextickets(request):
     d = { 
             "list_tickets": data
         }
-    print(d)
-    print(data[0])
     return render(request, 'index_tickets.html', d)
 
 # load all tickets from crm
 @csrf_exempt
 def loadtickets(request):
     if request.method == 'POST' or request.method == 'GET':
-        tickets = api.send_request('crm', 'api/get_tickets')
+        tickets = api.send_request('crm', 'api/get_tickets/promo')
         
-        result_expected = serializers.serialize("json", Tickets.objects.all())
-        prod, promo = json.dumps(tickets, sort_keys=True), json.dumps(result_expected, sort_keys=True)
-        if prod != promo:
-            Tickets.objects.all().delete()
-            t = json.loads(tickets)
-            for c in t['tickets']:
-                record = Tickets(id = c['id'], date = c['date'], prix = c['prix'], client = c['client'], pointsFidelite = c['pointsFidelite'], modePaiement = c['modePaiement'])
-                record.save()
-                for a in c['articles']:
-                    arti = ArticlesList(codeProduit = a['codeProduit'], quantity = a['quantity'])
-                    arti.save()
-                    record.articles.add(arti)
+        # result_expected = serializers.serialize("json", Tickets.objects.all())
+        # prod, promo = json.dumps(tickets, sort_keys=True), json.dumps(result_expected, sort_keys=True)
+        # if prod != promo:
+        #     Tickets.objects.all().delete()
+        t = json.loads(tickets)
+        for c in t['tickets']:
+            record = Tickets(id = c['id'], date = c['date'], prix = c['prix'], client = c['client'], pointsFidelite = c['pointsFidelite'], modePaiement = c['modePaiement'])
+            record.save()
+            for a in c['articles']:
+                arti = ArticlesList(codeProduit = a['codeProduit'], quantity = a['quantity'])
+                arti.save()
+                record.articles.add(arti)
     return render(request, 'home.html')

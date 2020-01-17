@@ -28,7 +28,6 @@ def loadcrm(request):
         customers = api.send_request('crm', 'api/data')
         result_expected = serializers.serialize("json", Customers.objects.all())
         crm, promo = json.dumps(customers, sort_keys=True), json.dumps(result_expected, sort_keys=True)
-        print(crm)
         if crm != promo:
             Customers.objects.all().delete()
             customers = json.loads(customers)
